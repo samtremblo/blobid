@@ -37,7 +37,7 @@ function draw(){
   }
 
   for ( let b of blobs){
-  b.blob2();
+  b.blob1();
 
   }
 
