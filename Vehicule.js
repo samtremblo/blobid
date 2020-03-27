@@ -160,7 +160,8 @@ class Vehicule {
             this.arrive(this.target, 50);
         }
     }
-
+    
+    
     draw(){
         this.applyBehavior();
         this.update();

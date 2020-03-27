@@ -1,16 +1,23 @@
 
 let continents = [];
+let blobs = [];
+
 function setup(){
 
-  createCanvas(400,400);
+  createCanvas(windowWidth,windowHeight);
   
+  
+
   for( i = 0 ; i < 7 ; i++){
 
   
   
   randomPos = createVector(random(width),random(height));
   let v  = new Vehicule(randomPos);
+  
   continents.push(v);
+  let b = new Blob(v.pos.x,v.pos.y);
+  blobs.push(b);
   }
 
 }
@@ -20,7 +27,17 @@ function draw(){
   background(255);
 
   for ( let v of continents) {
-  v.draw()
+  v.draw();
+
+  }
+
+  for( i = 0 ; i < 7 ; i++){
+    blobs[i].updatePos(continents[i].pos);
+
+  }
+
+  for ( let b of blobs){
+  b.blob2();
 
   }
 
