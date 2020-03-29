@@ -59,7 +59,7 @@ function setup() {
 
 
   createCanvas(windowWidth, windowHeight);
- background(40)
+ background(20)
 
   for(let i=0;i<amountShapes;i++){
     _shape.push(new Shape());
@@ -84,6 +84,7 @@ if(Recovered) text((totalDeath)+" personnes se sont rétablies depuis le début"
 }
 
 function draw() {
+  blendMode(DIFFERENCE)
   //background(40);
   for (let x = 0; x < amountShapes; x ++) { 
     push();
