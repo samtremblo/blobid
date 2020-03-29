@@ -15,7 +15,7 @@ function setup(){
 
 
 function draw(){
-  background(200)
+  background(40)
   fill(0,0,0,120);
  // blendMode(DIFFERENCE);
 

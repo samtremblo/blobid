@@ -10,7 +10,7 @@ class Shape {
 
     this.totalDeath = totalDeath;
     
-    if(Recovered)this.size = .0001;
+    if(Recovered)this.size = .0002;
     if(Death)this.size = .001;
 
   }
