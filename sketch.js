@@ -15,9 +15,9 @@ function setup(){
 
 
 function draw(){
-  background(40)
+  background(40 )
   fill(0,0,0,120);
- // blendMode(DIFFERENCE);
+ blendMode(DIFFERENCE);
 
  for ( let p of ps.particles){
    p.applyForce(ps.wind(-0.001));

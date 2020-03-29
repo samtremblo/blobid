@@ -6,7 +6,7 @@ let ps_foreground
 let pg
 /////////////////////////
 
-let amountShapes = 4;
+let amountShapes;
 let _shape = []; 
 let totalDeath=0;
 
@@ -44,7 +44,7 @@ function preload() {
 
 
 function setup() {
-
+ amountShapes = random(1,20);
   //fetch all the numbers
   for (let r = 1; r < table.getRowCount(); r++)
   for (let c = 4; c < table.getColumnCount(); c++) {
