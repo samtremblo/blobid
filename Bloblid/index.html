@@ -21,11 +21,35 @@
 <body>
 <div style="position: absolute;">
 <p style="font-style: oblique;" id="datetime"></p>
-  <h3><script>
+  <h3>
+    <script>
     var dt = new Date();
     document.getElementById("datetime").innerHTML = dt.toLocaleString();
   </script></h3>
-  <h3>Jour 21</h3>
+  <p>Jour <span id="demo"></span></p>
+
+
+  <div class="slidecontainer">
+    <input type="range" min="1" max="100" value="100" class="slider" id="myRange">
+  </div>
+  <script>
+
+
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
+    output.innerHTML = slider.value; // Display the default slider value
+    
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
+    
+    
+    </script>
 
   <p style="    width: 15%;
   line-height: 1.2;
@@ -60,6 +84,26 @@
       
  
 </p>
+
 </body>
 
+<footer>
+  <div style="width: 100%;"class="slidecontainer">
+    <p>Nombre d'infecté: xxxx</p>
+    <p>Nombre de rétablissements: xxxx</p>
+    <p>Nombre de décès: xxx</p>
+
+
+    <label for="cars">Pays:</label>
+
+    <select id="cars">
+      <option value="volvo">Canada</option>
+      <option value="saab">USA</option>
+      <option value="mercedes">Chine</option>
+      <option value="audi">Italie</option>
+    </select> 
+    <br>
+    <br>
+  </div>
+</footer>
 </html>

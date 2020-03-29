@@ -6,7 +6,6 @@ let Death = false;
 let Recovered = true;
 
 
-
 function preload() {
   //my table is comma separated value "csv"
   //and has a header specifying the columns labels
