@@ -33,9 +33,10 @@ shapeDraw() {
     let mirrorX = map(sin(this.theta), 0, 255, 0, 255); 
     pg.beginShape();
     if(Death)fill(1000, 0, 0, 1);
-    if(Recovered)fill(1000,1000, 1000, 1);
+    if(Recovered)fill(1,0, 1, 1);
 
-
+    pg.noFill();
+    pg.stroke(100, 2)
 
     for (let i = 0; i< 10 ; i++) {
       pg.curveVertex(this.ShapeHandleX[i]*mirrorX, this.ShapeHandleY[i]);
