@@ -33,7 +33,7 @@ shapeDraw() {
     let mirrorX = map(sin(this.theta), 0, 255, 0, 255); 
     beginShape();
     if(Death)fill(1000, 0, 0, 1);
-    if(Recovered)fill(0, 1000, 0, 1);
+    if(Recovered)fill(1000,1000, 1000, 1);
 
 
 
