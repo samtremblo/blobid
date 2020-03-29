@@ -3,9 +3,9 @@ class Blob{
     constructor(){
 
         this.pos = createVector(0,0);
-        this.size = 60; 
+        this.size = random(30,80); 
         this.yOffset = 0;
-        this.yOff = 0.1;
+        this.yOff = 0.01;
 
         this.xOff = 0.1;
 
@@ -13,6 +13,9 @@ class Blob{
         
         this.vs = [];
         this.theta = 0
+
+        this.offset1 = random(0,500);
+        this.offset2 =  random(0,500);
     }
 
 
@@ -22,27 +25,31 @@ class Blob{
     }
 
     blob1(){
-
+        push();
         beginShape();
-        noStroke();
+        stroke(0);
+        strokeWeight(4);
+        fill(0,0,0,170);
+        //noStroke();
             for(let i = 0 ; i < TWO_PI ; i += TWO_PI/360){
-
+                
+                
                 let x_polar = this.pos.x + this.size*0.5 * cos(i);
                 let y_polar = this.pos.y + this.size*0.5 * sin(i);
                 let p = this.res( x_polar , y_polar);
-                ellipse(p.x,p.y,5)
                 curveVertex(p.x , p.y);
             }
         endShape(CLOSE);
+        pop();
     }
 
     //play with res for better results of blob1
     res( x , y){
 
         let p = createVector(x,y);
-        let scl = 0.001; 
-        let ang = noise( p.x * scl, p.y * scl, 500+frameCount * 0.001)*100;
-        let off = noise( p.x * scl, p.y * scl, frameCount * 0.001)*50;
+        let scl = 0.0008; 
+        let ang = noise( p.x * scl, p.y * scl, this.offset1+frameCount * 0.0001)*75;
+        let off = noise( p.x * scl, p.y * scl, this.offset2+frameCount * 0.01)*50;
 
         p.x += cos(ang) * off;
         p.y += sin(ang) * off;

@@ -4,20 +4,20 @@ class Vehicule {
     constructor(_pos){
 
         this.pos = _pos;
-        this.vel= createVector(random(1,1), random(-1,1));
+        this.vel = createVector(0,0);
         this.acc= createVector(0, 0);
 
         this.r = 5;
 
-        this.maxSpeed = 1;
-        this.maxForce = 0.04;
+        this.maxSpeed = random(0.8,1.2);
+        this.maxForce = random(0.5,1.5);
         this.target = createVector(random(width), random(height));
         this.wanderTheta = 0;
 
-        this.behavior = 0//floor(random(0,2)); // 0 = wandering 1= arriving
+        this.behavior = floor(random(0,2)); // 0 = wandering 1= arriving
         this.flipped = false;
         this.flippedTimer =0;
-        console.log(this.behavior);
+        
     }
 
     update(){
@@ -25,18 +25,12 @@ class Vehicule {
 
         this.vel.add(this.acc);
         this.vel.limit(this.maxSpeed);
+        
        
         this.pos.add(this.vel);
         this.acc.mult(0);
 
-       if(this.flipped) this.flippedTimer++;
-
-        if(this.flippedTimer > 60){
-
-            this.flipped = false;
-            console.log("reset")
-            this.flippedTimer =0;
-        }
+      
         
     }
 
@@ -123,6 +117,7 @@ class Vehicule {
     }
 
     display(){
+
         let theta = this.vel.heading() + PI / 2;
         fill(127);
         stroke(200);
@@ -154,26 +149,25 @@ class Vehicule {
 
         let desired = null;
         
-        if (this.pos.x < d && this.flipped == false) {
+        if (this.pos.x < d ) {
           
             desired = createVector(this.maxSpeed, this.vel.y);
-            this.target.mult(-1);
+           
         
 
-        } else if (this.pos.x > width - d && this.flipped == false) {
+        } else if (this.pos.x > width - d ) {
 
-        //console.log("flipped")
-        this.flipped = true;
+      
           desired = createVector(-this.maxSpeed, this.vel.y);
-          this.target.mult(-1);
+          
           
           
         }
     
-        if (this.pos.y < d && this.flipped == false) {
+        if (this.pos.y < d ) {
           desired = createVector(this.vel.x, this.maxSpeed);
           
-        } else if (this.pos.y > height - d && this.flipped == false) {
+        } else if (this.pos.y > height - d ) {
           
           desired = createVector(this.vel.x, -this.maxSpeed);
         }
@@ -183,8 +177,7 @@ class Vehicule {
           desired.normalize();
           desired.mult(this.maxSpeed);
           let steer = p5.Vector.sub(desired, this.vel);
-          steer.limit(this.maxForce);
-          this.target = steer.copy();
+          steer.mult(3);
           this.applyForce(steer);
         }
 
@@ -230,8 +223,8 @@ class Vehicule {
         this.applyBehavior();
         
         this.update();
-        this.bounceOnWall();
-        this.display();
+        this.wraparound();
+        //this.display();
     }
 
 }
