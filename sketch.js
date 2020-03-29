@@ -8,7 +8,7 @@ function setup(){
   
   
 
-  for( i = 0 ; i < 7 ; i++){
+  for( i = 0 ; i < 2 ; i++){
 
   
   
@@ -24,20 +24,22 @@ function setup(){
 
 
 function draw(){
-  background(255);
+  background(255)
+  fill(0,0,0,120);
+ // blendMode(DIFFERENCE);
 
   for ( let v of continents) {
   v.draw();
-
+  v.showTarget();
   }
 
-  for( i = 0 ; i < 7 ; i++){
+  for( i = 0 ; i < 2 ; i++){
     blobs[i].updatePos(continents[i].pos);
 
   }
 
   for ( let b of blobs){
-  b.blob1();
+  //b.blob1();
 
   }
 

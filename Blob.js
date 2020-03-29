@@ -3,7 +3,7 @@ class Blob{
     constructor(){
 
         this.pos = createVector(0,0);
-        this.size = 50; 
+        this.size = 60; 
         this.yOffset = 0;
         this.yOff = 0.1;
 

@@ -10,19 +10,33 @@ class Vehicule {
         this.r = 5;
 
         this.maxSpeed = 1;
-        this.maxForce = 1;
+        this.maxForce = 0.04;
         this.target = createVector(random(width), random(height));
         this.wanderTheta = 0;
 
-        this.behavior = floor(random(0,2)); // 0 = wandering 1= arriving
+        this.behavior = 0//floor(random(0,2)); // 0 = wandering 1= arriving
+        this.flipped = false;
+        this.flippedTimer =0;
         console.log(this.behavior);
     }
 
     update(){
+        
+
         this.vel.add(this.acc);
         this.vel.limit(this.maxSpeed);
+       
         this.pos.add(this.vel);
         this.acc.mult(0);
+
+       if(this.flipped) this.flippedTimer++;
+
+        if(this.flippedTimer > 60){
+
+            this.flipped = false;
+            console.log("reset")
+            this.flippedTimer =0;
+        }
         
     }
 
@@ -74,7 +88,7 @@ class Vehicule {
         
         let desired = this.vel.copy();
         desired.normalize()
-        desired.mult(100);
+        desired.mult(3);
         desired.add(this.pos);
         
         
@@ -93,13 +107,19 @@ class Vehicule {
         //line(desired.x,desired.y,x,y)
         //line(this.pos.x,this.pos.y,target.x,target.y)
         
-        let target = createVector( x,y);
-        //target.limit(this.maxForce)
-        target.add(this.vel)
-       
-        this.seek(target)
+        this.target = createVector( x,y);
+        
+        this.target.add(this.vel)
+       // this.target.limit(this.maxForce)
+        this.arrive(this.target,10)
 
 
+    }
+
+    showTarget(){
+        push();
+        fill(255,0,0,120);
+        ellipse(this.target.x, this.target.y, 10);
     }
 
     display(){
@@ -130,6 +150,50 @@ class Vehicule {
           }
     }
 
+    boundaries(d) {
+
+        let desired = null;
+        
+        if (this.pos.x < d && this.flipped == false) {
+          
+            desired = createVector(this.maxSpeed, this.vel.y);
+            this.target.mult(-1);
+        
+
+        } else if (this.pos.x > width - d && this.flipped == false) {
+
+        //console.log("flipped")
+        this.flipped = true;
+          desired = createVector(-this.maxSpeed, this.vel.y);
+          this.target.mult(-1);
+          
+          
+        }
+    
+        if (this.pos.y < d && this.flipped == false) {
+          desired = createVector(this.vel.x, this.maxSpeed);
+          
+        } else if (this.pos.y > height - d && this.flipped == false) {
+          
+          desired = createVector(this.vel.x, -this.maxSpeed);
+        }
+    
+        if (desired !== null) {
+           
+          desired.normalize();
+          desired.mult(this.maxSpeed);
+          let steer = p5.Vector.sub(desired, this.vel);
+          steer.limit(this.maxForce);
+          this.target = steer.copy();
+          this.applyForce(steer);
+        }
+
+        line(d,d,width-d,d);
+        line(d,d,d,height-d);
+        line(width-d,height-d,width-d,d);
+        line(width-d,height-d,d,height-d);
+      }
+
     wraparound() {
 
         if ((this.pos.x > width)){
@@ -154,7 +218,7 @@ class Vehicule {
     applyBehavior(){
         if(this.behavior == 0 ){
             
-            this.wandering(50);
+            this.wandering(25);
         }else if (this.behavior == 1){
             
             this.arrive(this.target, 50);
@@ -164,8 +228,9 @@ class Vehicule {
     
     draw(){
         this.applyBehavior();
+        
         this.update();
-        this.wraparound();
+        this.bounceOnWall();
         this.display();
     }
 
