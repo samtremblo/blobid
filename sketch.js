@@ -8,27 +8,8 @@ function setup(){
 
   createCanvas(windowWidth,windowHeight);
   
-  ps = new ParticleSystem();
-  ps_foreground = new ParticleSystem();
 
-  for(let i = 0 ; i < 30;i++){
-    ps.addParticle(random(width), random(height));
-  }
-
-  for(let i = 0 ; i < 25;i++){
-    ps_foreground.addParticle(random(width), random(height));
-  }
-  for( i = 0 ; i < 7 ; i++){
-
-  
-  
-  randomPos = createVector(random(width),random(height));
-  let v  = new Vehicule(randomPos);
-  
-  continents.push(v);
-  let b = new Blob(v.pos.x,v.pos.y);
-  blobs.push(b);
-  }
+  setupEtienne();
 
 }
 
@@ -63,4 +44,32 @@ function draw(){
   }
 ps_foreground.run();
 
+}
+
+function setupEtienne()
+{
+
+
+  
+  ps = new ParticleSystem();
+  ps_foreground = new ParticleSystem();
+
+  for(let i = 0 ; i < 30;i++){
+    ps.addParticle(random(width), random(height));
+  }
+
+  for(let i = 0 ; i < 25;i++){
+    ps_foreground.addParticle(random(width), random(height));
+  }
+  for( i = 0 ; i < 7 ; i++){
+
+  
+  
+  randomPos = createVector(random(width),random(height));
+  let v  = new Vehicule(randomPos);
+  
+  continents.push(v);
+  let b = new Blob(v.pos.x,v.pos.y);
+  blobs.push(b);
+  }
 }
