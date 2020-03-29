@@ -3,6 +3,7 @@ let continents = [];
 let blobs = [];
 let ps
 let ps_foreground
+let pg
 /////////////////////////
 
 let amountShapes = 4;
@@ -58,7 +59,7 @@ function setup() {
 
 
 
-  createCanvas(windowWidth, windowHeight);
+createCanvas(windowWidth, windowHeight);
  background(20)
 
   for(let i=0;i<amountShapes;i++){
@@ -79,19 +80,14 @@ if(Recovered) text((totalDeath)+" personnes se sont rétablies depuis le début"
   }
 
   setupEtienne();
-  
+  pg = createGraphics(windowWidth, windowHeight);
   
 }
 
 function draw() {
-  blendMode(DIFFERENCE)
+  //blendMode(DIFFERENCE)
   //background(40);
-  for (let x = 0; x < amountShapes; x ++) { 
-    push();
-    translate(width/2, height/2,random(400, 500));
-    _shape[x].shapeDraw();
-    pop();
-  }
+
 
   for ( let p of ps.particles){
     p.applyForce(ps.wind(-0.001));
@@ -108,6 +104,9 @@ function draw() {
      blobs[i].updatePos(continents[i].pos);
  
    }
+
+   shape();
+   image(pg,0,0)
  
    for ( let b of blobs){
    b.blob1();
@@ -144,5 +143,14 @@ function setupEtienne()
   continents.push(v);
   let b = new Blob(v.pos.x,v.pos.y);
   blobs.push(b);
+  }
+}
+
+function shape(){
+  for (let x = 0; x < amountShapes; x ++) { 
+    pg.push();
+    pg.translate(width/2, height/2,random(400, 500));
+    _shape[x].shapeDraw();
+    pg.pop();
   }
 }

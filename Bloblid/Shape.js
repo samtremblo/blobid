@@ -31,16 +31,16 @@ for(let i = 0; i<this.ShapeHandles;i++){
 shapeDraw() {
   //drawing a shape from the vertex and making it mirror
     let mirrorX = map(sin(this.theta), 0, 255, 0, 255); 
-    beginShape();
+    pg.beginShape();
     if(Death)fill(1000, 0, 0, 1);
     if(Recovered)fill(1000,1000, 1000, 1);
 
 
 
     for (let i = 0; i< 10 ; i++) {
-      curveVertex(this.ShapeHandleX[i]*mirrorX, this.ShapeHandleY[i]);
+      pg.curveVertex(this.ShapeHandleX[i]*mirrorX, this.ShapeHandleY[i]);
     }
-    endShape(CLOSE);
+    pg.endShape(CLOSE);
     this.theta +=random(.05, 1);
   }
   

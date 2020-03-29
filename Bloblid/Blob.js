@@ -29,7 +29,9 @@ class Blob{
         beginShape();
         stroke(255);
         strokeWeight(1);
+
         fill(0,0,0,170);
+        //noFill();
         //noStroke();
             for(let i = 0 ; i < TWO_PI ; i += TWO_PI/360){
                 
