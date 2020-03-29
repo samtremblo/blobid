@@ -36,7 +36,8 @@ shapeDraw() {
     if(Recovered)fill(1,0, 1, 1);
 
     pg.noFill();
-    pg.stroke(100, 2)
+    pg.stroke(100, 1);
+    pg.strokeWeight(1)
 
     for (let i = 0; i< 10 ; i++) {
       pg.curveVertex(this.ShapeHandleX[i]*mirrorX, this.ShapeHandleY[i]);
