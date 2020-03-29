@@ -59,7 +59,7 @@ function setup() {
 
 
   createCanvas(windowWidth, windowHeight);
- background(2)
+ background(40)
 
   for(let i=0;i<amountShapes;i++){
     _shape.push(new Shape());
@@ -84,6 +84,7 @@ if(Recovered) text((totalDeath)+" personnes se sont rétablies depuis le début"
 }
 
 function draw() {
+  //background(40);
   for (let x = 0; x < amountShapes; x ++) { 
     push();
     translate(width/2, height/2,random(400, 500));
@@ -94,7 +95,7 @@ function draw() {
   for ( let p of ps.particles){
     p.applyForce(ps.wind(-0.001));
   }
-  ps.run();
+ // ps.run();
   
  
    for ( let v of continents) {
@@ -114,7 +115,7 @@ function draw() {
    for ( let p of ps_foreground.particles){
      p.applyForce(ps_foreground.wind(0.001));
    }
- ps_foreground.run();
+// ps_foreground.run();
 }
 
 function setupEtienne()
