@@ -29,6 +29,10 @@ function preload() {
 
 
 
+  function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+  }
+  
 
 
 
@@ -47,20 +51,20 @@ function setup() {
 
 
   createCanvas(windowWidth, windowHeight);
- background(255)
+ background(2)
 
   for(let i=0;i<amountShapes;i++){
     _shape.push(new Shape());
     _shape[i] =  new Shape(); 
     _shape[i].initiate();
    
-    textSize(32);
+    textSize(20);
     textAlign(CENTER, CENTER);
+fill(100)
+textFont('monospace');
 
 
-
-    
-    if(Recovered) text((totalDeath)+" sont rétablis", windowWidth*.5, windowHeight*.9);
+if(Recovered) text((totalDeath)+" personnes se sont rétablies depuis le début", windowWidth*.5, windowHeight*.9);
     if(Death) text((totalDeath)+" poumons se sont éteints", windowWidth*.5, windowHeight*.9);
 
 
