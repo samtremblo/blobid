@@ -1,11 +1,17 @@
 class Shape {
 
-  constructor(){
+  constructor(totalDeath){
     
     this.ShapeHandleX = [0];
     this.ShapeHandleY = [0];
     this.theta = 0;
     this.ShapeHandles = int(random(5,9));
+  
+
+    this.totalDeath = totalDeath;
+    
+    if(Recovered)this.size = .0001;
+    if(Death)this.size = .001;
 
   }
 
@@ -15,8 +21,8 @@ class Shape {
   
 for(let i = 0; i<this.ShapeHandles;i++){
 
-  this.ShapeHandleX[i]  = random(-300,300);
-  this.ShapeHandleY[i]  = random(-300,300);
+  this.ShapeHandleX[i]  = random(-totalDeath*this.size,totalDeath*this.size);
+  this.ShapeHandleY[i]  = random(-totalDeath*this.size,totalDeath*this.size);
 
   }  
   
@@ -26,13 +32,16 @@ shapeDraw() {
   //drawing a shape from the vertex and making it mirror
     let mirrorX = map(sin(this.theta), 0, 255, 0, 255); 
     beginShape();
-    fill(0, 0, 0, 1);
+    if(Death)fill(1000, 0, 0, 1);
+    if(Recovered)fill(0, 1000, 0, 1);
+
+
 
     for (let i = 0; i< 10 ; i++) {
       curveVertex(this.ShapeHandleX[i]*mirrorX, this.ShapeHandleY[i]);
     }
     endShape(CLOSE);
-    this.theta +=random(.5, .01);
+    this.theta +=random(.05, 1);
   }
   
 }

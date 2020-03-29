@@ -24,7 +24,7 @@ function setup(){
 
 
 function draw(){
-  background(255);
+ // background(255);
 
   for ( let v of continents) {
   v.draw();
