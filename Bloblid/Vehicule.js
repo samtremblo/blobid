@@ -9,7 +9,7 @@ class Vehicule {
 
         this.r = 5;
 
-        this.maxSpeed = random(0.8,1.2);
+        this.maxSpeed = random(0.8,4);
         this.maxForce = random(0.5,1.5);
         this.target = createVector(random(width), random(height));
         this.wanderTheta = 0;

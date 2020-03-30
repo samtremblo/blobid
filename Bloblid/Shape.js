@@ -37,7 +37,7 @@ shapeDraw() {
 
     pg.fill(0,0,0,1)
   //  pg.noFill();
-    pg.stroke(100, 1);
+    pg.stroke(200, 1);
     pg.strokeWeight(1)
 
     for (let i = 0; i< 10 ; i++) {

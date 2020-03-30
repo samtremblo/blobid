@@ -43,8 +43,10 @@ class Particle {
   // basic particule display method
   display() {
     push();
-    noStroke()
-    fill(255,255,255, this.opa);
+    strokeWeight(1)
+    stroke(255,255,255);
+    noFill();
+    //fill(255,255,255, this.opa);
     rectMode(CENTER);
     rect(this.pos.x, this.pos.y,this.size,height);
     pop()

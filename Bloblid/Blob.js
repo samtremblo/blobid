@@ -30,8 +30,8 @@ class Blob{
         stroke(255);
         strokeWeight(1);
 
-        fill(0,0,0,170);
-        //noFill();
+        fill(0,0,0,70);
+        noFill();
         //noStroke();
             for(let i = 0 ; i < TWO_PI ; i += TWO_PI/360){
                 
@@ -62,7 +62,7 @@ class Blob{
     blob2(){
 
         //UNCOMMENT FOR THE LOLZ
-        //blendMode(DIFFERENCE)
+        blendMode(DIFFERENCE)
         
         push();
         //noFill();
