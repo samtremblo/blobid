@@ -35,7 +35,8 @@ shapeDraw() {
     if(Death)fill(1000, 0, 0, 1);
     if(Recovered)fill(1,0, 1, 1);
 
-    pg.noFill();
+    pg.fill(0,0,0,1)
+  //  pg.noFill();
     pg.stroke(100, 1);
     pg.strokeWeight(1)
 
