@@ -33,9 +33,11 @@ dataContinent =[]
 
 //strip down data
 dhContinent.removeCols('Continent_Code','Country_Name','Two_Letter_Country_Code','Country_Number');
-dhCovid.removeCols('dateRep','geoId','popData2018');
+dhCovid.removeCols('geoId','popData2018');
 
 createContinents();
+dhContinent.assignContinent(dhCovid.data);
+setupContinents();
 
 }
 
@@ -65,5 +67,37 @@ function createContinents(){
   northAmerica = new Continent('northAmerica');
   oceania = new Continent('oceania');
   southAmerica = new Continent('southAmerica');
+
+}
+
+function setupContinents(){
+  antartica.removeEmpty();
+  antartica.removeEmpty();
+  antartica.sortDays();
+
+  africa.removeEmpty();
+  africa.removeEmpty();
+  africa.sortDays();
+
+  asia.removeEmpty();
+  asia.removeEmpty();
+  asia.sortDays();
+
+  europe.removeEmpty();
+  europe.removeEmpty();
+  europe.sortDays();
+  
+  northAmerica.removeEmpty();
+  northAmerica.removeEmpty();
+  northAmerica.sortDays();
+
+  
+  oceania.removeEmpty();
+  oceania.removeEmpty();
+  oceania.sortDays();
+  
+  southAmerica.removeEmpty();
+  southAmerica.removeEmpty();
+  southAmerica.sortDays();
 
 }

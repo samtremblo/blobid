@@ -31,7 +31,7 @@ class DataHandler{
         let continent = element[0];
         let code = element[1]
 
-        console.log(element);
+        
 
         if (continent == 'Asia') asia.addData(this.checkContinent(table ,code));
         if (continent == 'Antarctica') antartica.addData(this.checkContinent(table ,code));
