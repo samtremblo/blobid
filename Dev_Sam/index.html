@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html> 
+  <head> 
+    <title>Blobid</title> 
+    <script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head> 
+  <body> 
+      
+    <script type="text/javascript" src="index.js"> 
+    </script> 
+    <div id="console">
+        <script>
+            function startTime() {
+                var today = new Date();
+                var date = today.getDate();
+                var month = today.getMonth();
+                var year = today.getFullYear();
+
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+
+
+                var isReady = true;
+                m = checkTime(m);
+                s = checkTime(s);
+                document.getElementById('txt').innerHTML =
+               date  + "-" +  month + "-" + year + " " + h + ":" + m + ":" + s;
+                var t = setTimeout(startTime, 500);
+            }
+            function checkTime(i) {
+                if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+            
+
+                return i;
+            }
+
+
+            setTimeout(function(){
+
+              if(isReady=true)  document.getElementById('a').innerHTML = "blobid-loader@admin:"
+
+            }, 1000);
+
+            setTimeout(function(){
+
+              if(isReady){
+                document.getElementById('c').innerHTML = "$ ready"
+                document.getElementById('b').innerHTML = "~"
+              } 
+
+}, 1200);
+
+setTimeout(function(){
+
+  if(isReady)document.getElementById('mainText').innerHTML = "Blobid is a different way to see data about the current crisis. "
+
+
+}, 1600);
+
+setTimeout(function(){
+
+
+
+}, 1700);
+
+
+
+setTimeout(function(){
+
+  if(isReady)document.getElementById('cheers').innerHTML = "Cheers! "
+
+
+}, 1750);
+
+setTimeout(function(){
+
+  if(isReady)document.getElementById('clicker').innerHTML = "Click here to start "
+
+  
+
+}, 1800);
+
+
+
+
+
+            </script>
+            </head>
+            
+            <body onload="startTime()">
+            
+            <div id="txt"></div>
+          
+
+
+            <br>
+            
+
+
+        
+      <!---  <span id="a">your-first-name@your-last-name</span>: ---> 
+       <!-- <span id="b">~</span> ---> 
+      <!-- <span id="c">$</span> cd CodeNerve/ laglaglaglaglaglag About_Us ---> 
+        <span id="a"></span><span id="b"></span><span id="c"></span>  <!-- laglaglaglaglaglaglaglaglag --><br/><br/>
+      <div id="mainText">  </div>  <br>   <p id="cheers"></p>></p> <br> <a id="clicker" href="#" onclick="HideText()"> </a>  <!-- sjkfhskjf -->
+        
+
+        
+      </div> 
+
+      <script>
+        function HideText() {
+          document.getElementById('console').parentNode.removeChild( document.getElementById('console'));
+        }
+        </script>
+    </script>
+  </body> 
+</html>

@@ -1,0 +1,48 @@
+body {
+	background-color:#111
+}
+
+#console {
+    font-family: courier, monospace;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+	color: rgb(94, 221, 94);
+	width:750px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:100px;
+	font-size:14px;
+}
+
+a {
+	color: rgb(94, 221, 94);
+}
+
+#a {
+	color: rgb(94, 221, 94);
+}
+
+#c {
+	color: rgb(94, 221, 94);
+}
+
+#b {
+	color: #ff0096;
+}
+
+#k {
+    	animation: change 1s;
+}
+
+#op{
+    	color: #888888
+}
+
+@keyframes change {
+    	0%  {	color: rgb(94, 221, 94);
+        }
+    	50% { 	color: rgb(94, 221, 94);
+        }
+    	99% { color: black; }
+}
