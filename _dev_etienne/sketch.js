@@ -72,21 +72,28 @@ async function getData(file,array){
 
 
 
+///VERIFY IF ELSE STATEMENT
 
-
-function returnData( dataType, time, loc){
+function returnData( dataType, time, location){
 
   console.log(arguments)
+
       if(dataType == 'death'){
+        console.log('inside death')
+
          if(time == 'day'){
+           console.log('inside death day')
            if(location === undefined){
+             console.log('inside deat day undefined')
              //return total death for today worldwide
              let death = data[1];
              let total = death.returnWW(time);
+             console.log(total)
              return total;
            }else{
+             console.log('inside death day else')
              //return total death for today at passed location
-              let total = data[1].returnLoc(loc ,time);
+              let total = data[1].returnLoc(location ,time);
               return total;
            }
          }else if( time == 'week'){  
@@ -96,7 +103,7 @@ function returnData( dataType, time, loc){
              return total;
           }else{
             //return total death for last week at passed location
-             let total = data[1].returnLoc(loc ,time);
+             let total = data[1].returnLoc(location ,time);
               return total;
           }
          }else if( time == 'month'){
@@ -106,9 +113,11 @@ function returnData( dataType, time, loc){
              let total = data[1].returnWW(time);
              
              return total;
+
           }else{
+            
             //return total death for last month at passed location
-            let total = data[1].returnLoc(loc ,time);
+            let total = data[1].returnLoc(location ,time);
               return total;
           }
          }else if( time == 'all'){
@@ -118,15 +127,21 @@ function returnData( dataType, time, loc){
             return total;
             
           }else{
+            console.log('here')
             //return total death for all time at passed location
-            let total = data[1].returnLoc(loc ,time);
+            let total = data[1].returnLoc(location ,time);
               return total;
           }
+         }else{
+           //return total death all time worldide
+           let total = data[1].returnWWAllTime();
+            return total;
          }
 
           
       }else if ( dataType == 'confirmed'){
-        
+        console.log('inside confirmed')
+
         if(time == 'day'){
           
           if(location === undefined){
@@ -136,7 +151,7 @@ function returnData( dataType, time, loc){
            return total;
           }else{
             //return total confirmed for today at passed location
-            let total = data[2].returnLoc(loc ,time);
+            let total = data[2].returnLoc(location ,time);
               return total;
           }
 
@@ -149,7 +164,7 @@ function returnData( dataType, time, loc){
            
          }else{
            //return total confirmed for last week at passed location
-           let total = data[2].returnLoc(loc ,time);
+           let total = data[2].returnLoc(location ,time);
               return total;
          }
         }else if( time == 'month'){
@@ -160,23 +175,30 @@ function returnData( dataType, time, loc){
             return total;
          }else{
            //return total confirmed for last month at passed location
-           let total = data[2].returnLoc(loc ,time);
+           let total = data[2].returnLoc(location ,time);
               return total;
          }
         }else if( time == 'all'){
+          
           if(location === undefined){
             //return total confirmed for all time worldwide
             let total = data[2].returnWWAllTime();
             return total;
          }else{
            //return total confirmed for all time at passed location
-           let total = data[2].returnLoc(loc ,time);
+           let total = data[2].returnLoc(location ,time);
               return total;
          }
+        }else{
+          //return total death all time worldide
+          let total = data[2].returnWWAllTime();
+           return total;
         }
   
   
       }else if ( dataType == 'recovered'){
+        console.log('inside recovered')
+
         if(time == 'day'){
           if(location === undefined){
              //return total recovered for today worldwide
@@ -184,7 +206,7 @@ function returnData( dataType, time, loc){
              return total;
           }else{
             //return total recovered for today at passed location
-             let total = data[0].returnLoc(loc ,time);
+             let total = data[0].returnLoc(location ,time);
               return total;
           }
 
@@ -196,7 +218,7 @@ function returnData( dataType, time, loc){
              return total;
          }else{
            //return total recovered for last week at passed location
-             let total = data[0].returnLoc(loc ,time);
+             let total = data[0].returnLoc(location ,time);
               return total;
          }
         }else if( time == 'month'){
@@ -207,7 +229,7 @@ function returnData( dataType, time, loc){
              return total;
          }else{
            //return total recovered for last month at passed location
-           let total = data[0].returnLoc(loc ,time);
+           let total = data[0].returnLoc(location ,time);
               return total;
          }
         }else if( time == 'all'){
@@ -217,19 +239,18 @@ function returnData( dataType, time, loc){
             let total = data[0].returnWWAllTime();
             return total;
          }else{
-          let total = data[0].returnLoc(loc ,time);
+          let total = data[0].returnLoc(location ,time);
           return total;
            //return total recovered for all time at passed location
          }
         }
+        else{
+          //return total death all time worldide
+          let total = data[0].returnWWAllTime();
+           return total;
+        }
   
         
-      else{
-        //return error message
-        //return error message
-      let error = 'error'
-      return error
-      }
 
   }
 } 

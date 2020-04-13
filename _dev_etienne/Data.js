@@ -101,12 +101,13 @@ returnWWAllTime(){
 returnWW(time){
 
   let today = this.returnDate();
-
+  
   let timeBefore = this.returnDate(time);
-
+  
   let temp_today = this.data.getColumn(today);
   let temp_timeBefore = this.data.getColumn(timeBefore);
-
+  console.log(temp_today)
+  console.log(temp_timeBefore)
   let total = 0;
   let index = 0
 
@@ -120,6 +121,7 @@ returnWW(time){
 
     index++;
   }
+  console.log(total)
 
   return total
 
