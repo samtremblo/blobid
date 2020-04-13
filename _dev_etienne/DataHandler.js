@@ -2,9 +2,10 @@ class DataHandler{
 
     constructor(data){
 
-        this.data = data
-       
-       
+        this.data = data;
+        this.days = [];
+        
+
       }
 
 
@@ -16,13 +17,19 @@ class DataHandler{
       for (let i = 0 ; i < numOfArg ; i++ ){
         this.data.removeColumn(arguments[i])
       }
-    
-  
-      
 
     }
 
+
     //function only for continent
+
+    asignCodes(){
+
+      for(let item of country_codes){
+        console.log(item);
+      }
+
+    }
 
     assignContinent(table){
 

@@ -1,101 +1,117 @@
 class Continent {
 
-//faire une fonction qui sort par jour
+    //faire une fonction qui sort par jour
 
-    constructor(name){
+    constructor(name) {
 
         this.name = name;
-        
-        this.countries = [] ;
+
+        this.countries = [];
         this.days = []
 
-       
+
+
     }
 
-    addData(data){
+    addData(data) {
 
         this.countries.push(data)
     }
 
-    removeEmpty(){
+    removeEmpty() {
         let temp = 0;
-        
-        for( let element of this.countries){
-            
+
+        for (let element of this.countries) {
+
             let size = element.length;
-            
-           
-            if(size == 0){
-               
-               let index = temp
-                this.countries.splice(index,1);
+
+
+            if (size == 0) {
+
+                let index = temp
+                this.countries.splice(index, 1);
 
             }
             temp++
-           
 
-        
+
+
         }
     }
 
-    sortDays(){
+    sortDays() {
 
         let highestElement = 0;
         let temp = 0;
-        let index =0 ;
-        for( let element of this.countries){
+        let index = 0;
+        for (let element of this.countries) {
             temp++
             let size = element.length;
-           
-            if(size > highestElement){
+
+            if (size > highestElement) {
                 highestElement = size;
-                index = temp-1
+                index = temp - 1
 
             }
-           
 
-        
+
+
         }
-        
+
         let table = this.countries[index]
         let compareTable = [this.countries]
-       
+
 
         compareTable[0].splice(index, 1)
-        
-        for( let i = 0 ; i<highestElement ; i++){
-        
+
+        for (let i = 0; i < highestElement; i++) {
+
             let row = table[i];
-      
-            let day = row.get('dateRep',0);
-           
-            let sameDays=[];
 
-       
-            for(let elements of compareTable[0]){ //for every countries in compareTable
+            let day = row.get('dateRep', 0);
 
-                for(let subElements of elements){ //for ervery day in that country
-                    let index =0;
-                      
-                        let compare_day = subElements.get('dateRep',0)
-                      if(compare_day == day){
+            let sameDays = [];
+
+
+            for (let elements of compareTable[0]) { //for every countries in compareTable
+
+                for (let subElements of elements) { //for ervery day in that country
+                    let index = 0;
+
+                    let compare_day = subElements.get('dateRep', 0)
+                    if (compare_day == day) {
                         sameDays.push(subElements);
-                        
-                        
-                      }
-                    
-                    
+
+
+                    }
                 }
-               
             }
             this.days.push(sameDays);
-            
-            
         }
+    }
 
+    removeDuplicateDay() {
+        this.days[0].splice(0, 1);
     }
 
 
+    deathToday() {
+        let totalDeathToday = 0;
+        for (let elements of this.days[0]) {
+            let death = elements.get('deaths', 0)
+            totalDeathToday += int(death);
+        }
+        return totalDeathToday;
+    }
+
+    casesToday() {
+        let totalDeathToday = 0;
+        for (let elements of this.days[0]) {
+            let death = elements.get('cases', 0)
+            totalDeathToday += int(death);
+        }
+        return totalDeathToday;
+    }
 
 
 }
