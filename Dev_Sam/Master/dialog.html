@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Text based input box using jQuery Terminal</title>
+    <link href="../css/jquery.terminal-src.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/js-polyfills/keyboard.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="dialog.js"></script>
+    <link href="dialog.css" rel="stylesheet"/>
+    <script src="../js/jquery.terminal-src.js"></script>
+    <script srcr="finder.js"></script>
+    <style>
+     .dialog {
+         --size: 1.5;
+     }
+    </style>
+    <script>
+
+function startTime() {
+                var today = new Date();
+                var date = today.getDate();
+                var month = today.getMonth();
+                var year = today.getFullYear();
+
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+
+
+                var isReady = true;
+                m = checkTime(m);
+                s = checkTime(s);
+                document.getElementById('txt').innerHTML =
+               date  + "-" +  month + "-" + year + " " + h + ":" + m + ":" + s;
+                var t = setTimeout(startTime, 500);
+            }
+            function checkTime(i) {
+                if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+            
+
+                return i;
+            }
+
+
+function loadScript(url, completeCallback) {
+   var script = document.createElement('script'), done = false,
+       head = document.getElementsByTagName("head")[0];
+   script.src = url;
+   script.onload = script.onreadystatechange = function(){
+     if ( !done && (!this.readyState ||
+          this.readyState == "loaded" || this.readyState == "complete") ) {
+       done = true;
+       completeCallback();
+
+      // IE memory leak
+      script.onload = script.onreadystatechange = null;
+      head.removeChild( script );
+    }
+  };
+  head.appendChild(script);
+}
+loadScript("finder.js",
+            function () { console.log('external script has been loaded.'); });
+
+     $(function() {
+         $('body').dialog(function(input) {
+var sup = input;
+
+
+dataSpawner.call();
+if(sup != undefined){
+  console.log(eval(sup))
+            document.getElementById('data').innerHTML = eval(sup)
+
+}
+
+
+             setTimeout(function() {
+
+
+            }, 100);
+         }, {
+             cols: 40,
+             rows: 10,
+             message: '',
+             title: ''
+         });
+     });
+
+     
+
+    </script>
+  </head>
+   
+  <body onload="startTime()">        
+    <div id="txt"></div>
+    <p id="data"></p>
+
+</html>
