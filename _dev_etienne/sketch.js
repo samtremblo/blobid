@@ -74,7 +74,7 @@ async function getData(file,array){
 
 
 
-function returnData( dataType, range, place){
+function returnData( dataType, time, loc){
 
   console.log(arguments)
       if(dataType == 'death'){
@@ -86,6 +86,8 @@ function returnData( dataType, range, place){
              return total;
            }else{
              //return total death for today at passed location
+              let total = data[1].returnLoc(loc ,time);
+              return total;
            }
          }else if( time == 'week'){  
            if(location === undefined){
@@ -94,15 +96,20 @@ function returnData( dataType, range, place){
              return total;
           }else{
             //return total death for last week at passed location
+             let total = data[1].returnLoc(loc ,time);
+              return total;
           }
          }else if( time == 'month'){
            
            if(location === undefined){
              //return total death for last month worldwide
              let total = data[1].returnWW(time);
+             
              return total;
           }else{
             //return total death for last month at passed location
+            let total = data[1].returnLoc(loc ,time);
+              return total;
           }
          }else if( time == 'all'){
            //return total death for all time worldwide
@@ -112,6 +119,8 @@ function returnData( dataType, range, place){
             
           }else{
             //return total death for all time at passed location
+            let total = data[1].returnLoc(loc ,time);
+              return total;
           }
          }
 
@@ -127,6 +136,8 @@ function returnData( dataType, range, place){
            return total;
           }else{
             //return total confirmed for today at passed location
+            let total = data[2].returnLoc(loc ,time);
+              return total;
           }
 
         }else if( time == 'week'){
@@ -138,6 +149,8 @@ function returnData( dataType, range, place){
            
          }else{
            //return total confirmed for last week at passed location
+           let total = data[2].returnLoc(loc ,time);
+              return total;
          }
         }else if( time == 'month'){
           
@@ -147,6 +160,8 @@ function returnData( dataType, range, place){
             return total;
          }else{
            //return total confirmed for last month at passed location
+           let total = data[2].returnLoc(loc ,time);
+              return total;
          }
         }else if( time == 'all'){
           if(location === undefined){
@@ -155,6 +170,8 @@ function returnData( dataType, range, place){
             return total;
          }else{
            //return total confirmed for all time at passed location
+           let total = data[2].returnLoc(loc ,time);
+              return total;
          }
         }
   
@@ -167,6 +184,8 @@ function returnData( dataType, range, place){
              return total;
           }else{
             //return total recovered for today at passed location
+             let total = data[0].returnLoc(loc ,time);
+              return total;
           }
 
         }else if( time == 'week'){
@@ -177,6 +196,8 @@ function returnData( dataType, range, place){
              return total;
          }else{
            //return total recovered for last week at passed location
+             let total = data[0].returnLoc(loc ,time);
+              return total;
          }
         }else if( time == 'month'){
           
@@ -186,6 +207,8 @@ function returnData( dataType, range, place){
              return total;
          }else{
            //return total recovered for last month at passed location
+           let total = data[0].returnLoc(loc ,time);
+              return total;
          }
         }else if( time == 'all'){
           
@@ -194,6 +217,8 @@ function returnData( dataType, range, place){
             let total = data[0].returnWWAllTime();
             return total;
          }else{
+          let total = data[0].returnLoc(loc ,time);
+          return total;
            //return total recovered for all time at passed location
          }
         }
