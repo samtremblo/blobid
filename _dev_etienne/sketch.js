@@ -1,22 +1,11 @@
 
-let dataCovid
-let dataContinent
+
 let recovered_temp, death_temp, confirmed_temp;
 let country_codes;
 let data = [3]; //0 = recovered 1 = death 2 = confirmed
-let dhContinent
-let dhCovid
-
-let antartica
-let africa
-let asia
-let europe
-let northAmerica
-let oceania
-let southAmerica
-let world
 
 
+//Preload les CSV
 function preload() {
 
 //preloading csv files
@@ -38,15 +27,6 @@ function setup() {
 data[0] = new Data('recovered' ,recovered_temp);
 data[1] = new Data('death' ,death_temp);
 data[2] = new Data('confirmed' ,confirmed_temp);
-
-country_codes = country_codes.getArray();
-
-//empty pre filled arrays
-for(let item of data){
-  item.setup();
-}
-
-
 
 }
 
@@ -73,25 +53,25 @@ async function getData(file,array){
 
 
 ///VERIFY IF ELSE STATEMENT
-
+//return data  base on passed argument
 function returnData( dataType, time, location){
 
-  console.log(arguments)
+ 
 
       if(dataType == 'death'){
         console.log('inside death')
 
          if(time == 'day'){
-           console.log('inside death day')
+           
            if(location === undefined){
-             console.log('inside deat day undefined')
+            
              //return total death for today worldwide
              let death = data[1];
              let total = death.returnWW(time);
-             console.log(total)
+             
              return total;
            }else{
-             console.log('inside death day else')
+             
              //return total death for today at passed location
               let total = data[1].returnLoc(location ,time);
               return total;
@@ -127,7 +107,7 @@ function returnData( dataType, time, location){
             return total;
             
           }else{
-            console.log('here')
+            
             //return total death for all time at passed location
             let total = data[1].returnLoc(location ,time);
               return total;
@@ -140,7 +120,7 @@ function returnData( dataType, time, location){
 
           
       }else if ( dataType == 'confirmed'){
-        console.log('inside confirmed')
+       
 
         if(time == 'day'){
           
@@ -197,7 +177,7 @@ function returnData( dataType, time, location){
   
   
       }else if ( dataType == 'recovered'){
-        console.log('inside recovered')
+        
 
         if(time == 'day'){
           if(location === undefined){
