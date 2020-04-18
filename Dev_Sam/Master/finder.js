@@ -3,7 +3,6 @@ function dataSpawner() {
 
 
 
-test.push({id:200,name:'Mahesh',age:35});
 
 
 

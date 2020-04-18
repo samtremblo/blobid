@@ -10,6 +10,12 @@
     <link href="dialog.css" rel="stylesheet"/>
     <script src="../js/jquery.terminal-src.js"></script>
     <script srcr="finder.js"></script>
+    <script src="p5.js"></script>
+    <script src="sketch.js"></script>
+    <script src="DataHandler.js"></script>
+    <script src="Data.js"></script>
+  
+    <script src="Continent.js"></script>
     <style>
      .dialog {
          --size: 1.5;
@@ -40,40 +46,20 @@ function startTime() {
             
 
                 return i;
+     
+              
             }
 
 
-function loadScript(url, completeCallback) {
-   var script = document.createElement('script'), done = false,
-       head = document.getElementsByTagName("head")[0];
-   script.src = url;
-   script.onload = script.onreadystatechange = function(){
-     if ( !done && (!this.readyState ||
-          this.readyState == "loaded" || this.readyState == "complete") ) {
-       done = true;
-       completeCallback();
-
-      // IE memory leak
-      script.onload = script.onreadystatechange = null;
-      head.removeChild( script );
-    }
-  };
-  head.appendChild(script);
-}
-loadScript("finder.js",
-            function () { console.log('external script has been loaded.'); });
-
      $(function() {
          $('body').dialog(function(input) {
-var sup = input;
+ input;
+preload();
+setup();
+ returnData('confirmed','week','canada');
 
 
-dataSpawner.call();
-if(sup != undefined){
-  console.log(eval(sup))
-            document.getElementById('data').innerHTML = eval(sup)
-
-}
+            document.getElementById('data').innerHTML = input
 
 
              setTimeout(function() {
