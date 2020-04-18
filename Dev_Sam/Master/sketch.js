@@ -13,11 +13,11 @@ function preload() {
  recovered_temp = loadTable('Recovered_Global.csv', 'csv','header');
  death_temp = loadTable('Death_Global.csv', 'csv','header');
  confirmed_temp = loadTable('Confirmed_Global.csv', 'csv','header');
- country_codes = loadTable('country_codes_csv.csv', 'csv','header');
+ //country_codes = loadTable('country_codes_csv.csv', 'csv','header');
  
  //old
  //dataCovid = loadTable('testData.csv', 'csv','header')
- dataContinent = loadTable('countries_continent.csv', 'csv','header')
+ //dataContinent = loadTable('countries_continent.csv', 'csv','header')
 
 }
 
