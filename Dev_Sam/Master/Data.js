@@ -10,8 +10,16 @@ class Data{
       }
 
     setup(){
-      
+      //search throught data for duplicate countries
+      //add all the rows in a single row
+      //add the new row to the table and remove all others
+
+      for (let item in this.data){
+        let country = item
+        console.log(country)
+      }
     }
+
     addCols(){
       this.data.addColumn('Continent');
       this.data.addColumn('Code');
@@ -127,6 +135,8 @@ returnWW(time){
 
 returnLoc(loc ,time){
 console.log(loc, time)
+console.log(typeof(loc))
+console.log(this.data)
 
  let country = this.data.findRows(loc,"Country/Region");
  let timeBefore;
@@ -182,4 +192,5 @@ console.log(loc, time)
 
 
 }
+
 

@@ -13,11 +13,11 @@ function preload() {
  recovered_temp = loadTable('Recovered_Global.csv', 'csv','header');
  death_temp = loadTable('Death_Global.csv', 'csv','header');
  confirmed_temp = loadTable('Confirmed_Global.csv', 'csv','header');
- country_codes = loadTable('country_codes_csv.csv', 'csv','header');
+ //country_codes = loadTable('country_codes_csv.csv', 'csv','header');
  
  //old
  //dataCovid = loadTable('testData.csv', 'csv','header')
- dataContinent = loadTable('countries_continent.csv', 'csv','header')
+ //dataContinent = loadTable('countries_continent.csv', 'csv','header')
 
 }
 
@@ -49,7 +49,35 @@ async function getData(file,array){
    
 }
 
+function returnCountries(){
 
+  let cleared = false;
+  let list = data[0].data.getColumn('Country/Region');
+  let index = 0;
+  
+  let list_length = list.length;
+
+  for(let i = 0; i < 2; i++){
+
+  for( let item in list){
+    if(index == list_length) break;
+
+    let compare_index = index + 1;
+    
+    if( list[item] == list[compare_index])
+      {
+        console.log( list[item],list[compare_index])
+        console.log('inside')
+        let t =list.splice(compare_index,1);
+      }
+
+      index++;
+  }
+}
+  console.log('Countries you can use:')
+  return list;
+ 
+}
 
 
 ///VERIFY IF ELSE STATEMENT

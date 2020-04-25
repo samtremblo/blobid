@@ -5,7 +5,7 @@ Confirmed_Global = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/ma
 Death_Global = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 Recovered_Global = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"		
 all = Recovered_Global,Confirmed_Global,Death_Global
-name = "_dev_etienne/Recovered_Global","_dev_etienne/Confirmed_Global","_dev_etienne/Death_Global"
+name = "Recovered_Global","Confirmed_Global","Death_Global"
 	
 for i in range(len(all)):
 		

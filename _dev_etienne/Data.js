@@ -6,6 +6,94 @@ class Data {
     this.title = title;
     this.data = data;
 
+    this.data.removeColumn(0)
+
+
+
+  }
+  sumRows(array){
+    let summed= [];
+
+    for(let item in array){
+        let row = array[item];
+        console.log('gg')
+        for(let col in row[0]){
+          console.log(col)
+        }
+        
+    }
+  }
+  setup(){
+    //iter through table to find duplicates and delete them
+    
+   
+    let numOfRows = this.data.getRowCount();
+    let numOfCols = this.data.getColumnCount();
+    //console.log('data ', numOfRows)
+    let index = 0;
+    let nextIndex = index+1;
+    let cleaned = false;
+
+  while(cleaned == false){
+    console.log('inside while')
+    for( let row in this.data.rows){
+      //select items to compare
+      let item = this.data.get(index,"Country/Region");
+      let item_compare = this.data.get(nextIndex,"Country/Region");
+
+     // console.log('picks' , item, item_compare);
+
+      if( item == item_compare){
+       // console.log('DUPLICATE!')
+        //add data of item_compare's row to item's row
+        console.log(item)
+          
+        for( let i = 3 ; i < numOfCols ; i++){
+          // if(i ==  numOfCols){
+          //   break;
+          // }
+          let val = this.data.get(index,i);
+          let valAdd = this.data.get(nextIndex,i);
+          //console.log(val , valAdd)
+          let newVal = parseInt(val)+parseInt(valAdd);
+          
+          //console.log('new',typeof newVal, newVal)
+          
+         // console.log('index', index , 'i', i)
+
+          this.data.set(index, i, newVal);
+
+
+          //console.log('updated cell',index, i, this.data.get(index,i))
+          //console.log('-----------')
+        }
+
+        //delete the duplicate rown
+        this.data.removeRow(nextIndex);
+
+        //update table length
+        numOfRows = this.data.getRowCount();
+       // console.log('new length', numOfRows)
+      }else{
+      //if no duplicate increments index
+      //console.log('increment')
+        index++;
+        nextIndex++;
+      }
+
+
+      //exit the loop when reaches the end
+      if( nextIndex == numOfRows){
+        
+        console.log('over')
+
+        cleaned = true;
+        break;
+      } 
+    }
+  }
+    console.log('index ', index)
+   console.log('modified table' ,this.data )
 
   }
   //return a formated date base on argument

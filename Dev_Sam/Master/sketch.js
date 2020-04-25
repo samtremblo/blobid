@@ -30,9 +30,11 @@ data[2] = new Data('confirmed' ,confirmed_temp);
 
 }
 
-
-
-
+function draw( ){
+  //console.log('drawing')
+  returnData('death' ,'week', 'Afghanistan');
+  
+}
 
 
 //get the data from the csv file and pushes it into an array
@@ -234,4 +236,7 @@ function returnData( dataType, time, location){
 
   }
 } 
+
+
+
 
