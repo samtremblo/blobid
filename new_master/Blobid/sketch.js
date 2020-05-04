@@ -199,18 +199,17 @@ let data;
       typeString = 'confirmed'
     }
 
-  
-if(typeString=="death" || typeString=="recovered"){
-data = returnData(words[0],words[1],words[2]);
 
-}
+    if(words[2]!=undefined)data = returnData(words[0],words[1],capitalize(words[2]));
+
+
 if(data == undefined) data = 0 ;  
     let string = data.toString() +' ' + typeString + ' last ' + words[1];
     console.log(string)
     newEntry(type,data,string);
 
 
-  if (words[0] == "help") {
+  if (words[0] == "help" && words.length<2) {
     isWritting = true;
     console.log("This is the help menu")
    amountLines = 0;
