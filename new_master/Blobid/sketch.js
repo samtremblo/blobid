@@ -1,9 +1,9 @@
 let inputHeight = 20;
 let AmountInputs = 0;
 let input;
+let layerManager ;
 
 let recovered_temp, death_temp, confirmed_temp;
-let country_codes;
 let data = [3]; //0 = recovered 1 = death 2 = confirmed
 
 let message = [];
@@ -40,7 +40,8 @@ function preload() {
 
 
 function setup() {
-
+ layerManager = new LayerManager();
+  blendMode(DIFFERENCE);
   //-----------------------------------------------------Creating a paragraph to put the console text in---------------------
 
   p = createP(
@@ -80,7 +81,7 @@ function setup() {
   //-----------------------------------------------------Giving a background color for the console and artwork--------------------
   let bg = color(17, 41, 31, 255);
   cnsl.background(bg)
-  artwork.background(0, 255)
+  artwork.background(255)
 
   //-----------------------------------------------------Placing both the artwork and the console--------------------
   image(artwork, width / 2, 0);
@@ -104,9 +105,6 @@ function draw() {
   }
 
 
-  else {
-
-  }
 
 }
 //-----------------------------------------------------Spawns initial message and appends every line-------------------
@@ -143,6 +141,11 @@ function keyPressed() {
   console.log(AmountInputs + " Inputs");
   AmountInputs++;
 
+  if(key == 'k'){
+  
+  }
+  
+
 }
 
 //-----------------------------------------------------Handles inputs--------------------
@@ -157,8 +160,32 @@ if(!isWritting){
 let words = Input.value().split(' ');
 
 
- returnData(words[0],words[1],words[2])
 // GenerateText(words);
+
+    let type = words[0];
+    //console.log('type', type)
+
+    let typeString ;
+    
+    if(type == 'recovered'){
+      typeString = 'recovered'
+    }
+    if ( type == 'death' ){
+      typeString = 'death'
+    }
+    if(type == 'confirmed'){
+      typeString = 'confirmed'
+    }
+
+  
+
+    let data = returnData(words[0],words[1],words[2]);
+    if(data == undefined) data = 0 ;
+
+    let string = data.toString() +' ' + typeString + ' last ' + words[1];
+    console.log(string)
+    newEntry(type,data,string);
+
 
   if (words[0] == "help") {
     isWritting = true;
@@ -190,6 +217,12 @@ Input.value("");
 
 }
 
+function newEntry(type,data,string){
+  let pos = createVector(width*0.5, height*0.5);
+  
+  layerManager.addLayer(type,data,string,pos);
+
+}
 
 function displayHelp(){
   
