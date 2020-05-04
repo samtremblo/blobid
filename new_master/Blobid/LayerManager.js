@@ -26,4 +26,8 @@ class LayerManager{
 
  }
 
+removeLayers(){
+  this.layers = []
+
+}
 }

@@ -5,6 +5,7 @@ class Layer{
   
  constructor(type,data,string,pos) 
   {
+
     this.words = [];
 
     this.type=type;
@@ -206,6 +207,7 @@ if( pick < this.target1){
 
 
 }
+
 //console.log(positions)
 for(let p in positions){
 /// CREATE COLORS SYSTEM
@@ -294,4 +296,10 @@ pointCircle(numPoints ,pos, r){
 
   return pickedPos;
 }
+
+Clean(){
+  fill(255);
+  rect(0, 0, windowWidth, windowHeight)
+}
+
 }

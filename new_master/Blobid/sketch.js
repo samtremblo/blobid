@@ -180,7 +180,7 @@ if(!isWritting){
 
 //-----------------------------------------------------breaks fown all the words to analyse them them-------------------
 let words = Input.value().split(' ');
-
+let data;
 
 // GenerateText(words);
 
@@ -200,10 +200,11 @@ let words = Input.value().split(' ');
     }
 
   
+if(typeString=="death" || typeString=="recovered"){
+data = returnData(words[0],words[1],words[2]);
 
-    let data = returnData(words[0],words[1],words[2]);
-    if(data == undefined) data = 0 ;
-
+}
+if(data == undefined) data = 0 ;  
     let string = data.toString() +' ' + typeString + ' last ' + words[1];
     console.log(string)
     newEntry(type,data,string);
@@ -218,8 +219,18 @@ let words = Input.value().split(' ');
 
   
   if (words[0] == "clear") {
-    p.html("")
+    p.html('blobid-loader@admin:~$ ready <br>');
 
+   
+      // artwork.background(0);
+    
+    layerManager.removeLayers();
+    artwork = createGraphics(width / 2, height);
+    artwork.background(255, 255)
+    image(artwork, width / 2, 0);
+
+       
+      
   }
 
 
@@ -271,7 +282,7 @@ function windowResized() {
 
 
   cnsl.background(bg)
-  artwork.background(0, 255)
+  artwork.background(255, 255)
 
 
   image(artwork, width / 2, 0);
