@@ -1,3 +1,4 @@
+
 class Word {
 
 
@@ -7,20 +8,27 @@ class Word {
         this.vel = createVector(0,0);
         this.acc= createVector(0, 0);
 
+        this.reduce = Math.random() >= 0.5;
         this.r = 5;
+
+        this.inc = random(1000);
 
         this.maxSpeed = random(0.8,3.2);
         this.maxForce = random(0.5,3.5);
+
         this.target = createVector(random(width), random(height));
         this.wanderTheta = 0;
 
-        this.behavior = floor(random(0,2)); // 0 = wandering 1= arriving
+        this.behavior = 1//floor(random(0,2)); // 0 = wandering 1= arriving
+        this.rotate = false;
+        this.theta = 0;
         this.flipped = false;
         this.flippedTimer =0;
-
+        this.outline = false; 
+        this.translateOrigin = false;
 
         this.text = text;
-        this.textSize = 20 ; 
+        this.textSize = random(10,50) ; 
         this.color = color; 
        
         
@@ -32,7 +40,70 @@ class Word {
         this.vel.limit(this.maxSpeed);
         this.pos.add(this.vel);
         this.acc.mult(0);   
+
+        this.textSize -= 0.01;
+        this.theta += this.inc;
+        this.inc+= 0.000001
     }
+
+    applyBehavior(){
+        if(this.behavior == 0 ){
+            
+            this.wandering(25);
+        }else if (this.behavior == 1){
+            
+            this.arrive(this.target, 50);
+        }
+    }
+
+
+    display(){
+
+        artwork.push(this.color);
+
+        //fill or outilnes 
+        if(this.outline == true){
+
+            artwork.noFill();
+            artwork.stroke(this.color);
+
+        }else{
+
+            artwork.noStroke();
+            artwork.fill(this.color);
+
+        }
+
+        artwork.textSize(this.textSize);
+
+        //rotation origin translated
+        if(this.translateOrigin == true){
+              artwork.translate(this.pos.x,this.pos.y);
+              if(this.rotate == true) artwork.rotate(this.theta);
+              artwork.text(this.text , 0, 0);
+        }else{
+            
+             if(this.rotate == true) artwork.rotate(this.theta);
+             artwork.text(this.text , this.pos.x,this.pos.y);
+        }
+        artwork.pop();
+        
+
+    }
+     
+    draw(){
+
+        this.applyBehavior();      
+        this.update();
+        this.wraparound();
+        this.display();
+    }
+  
+
+
+
+
+//moving behavior
 
     seek(target){
 
@@ -116,16 +187,13 @@ class Word {
         ellipse(this.target.x, this.target.y, 10);
     }
 
-    display(){
+    
 
-       // push();
-        fill(this.color);
-        textSize(this.textSize);
-        text(this.text , this.pos.x , this.pos.y);
-       // pop();
-        
+ 
 
-    }
+
+
+//edges behavior 
 
     bounceOnWall(){
 
@@ -173,10 +241,10 @@ class Word {
           this.applyForce(steer);
         }
 
-        line(d,d,width-d,d);
-        line(d,d,d,height-d);
-        line(width-d,height-d,width-d,d);
-        line(width-d,height-d,d,height-d);
+      //  line(d,d,width-d,d);
+      //  line(d,d,d,height-d);
+      //  line(width-d,height-d,width-d,d);
+      //  line(width-d,height-d,d,height-d);
       }
 
     wraparound() {
@@ -200,23 +268,7 @@ class Word {
 
     }
 
-    applyBehavior(){
-        if(this.behavior == 0 ){
-            
-            this.wandering(25);
-        }else if (this.behavior == 1){
-            
-            this.arrive(this.target, 50);
-        }
-    }
-    
-    
-    draw(){
-        this.applyBehavior();
-        
-        this.update();
-        this.wraparound();
-        this.display();
-    }
+
+
 
 }

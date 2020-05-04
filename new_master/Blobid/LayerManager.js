@@ -5,7 +5,7 @@ class LayerManager{
   
     this.layers = [];
     
-    this.max = 10;
+    this.max = 4;
   }
   
   checkMaximum(){

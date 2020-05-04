@@ -6,20 +6,21 @@ function setup(){
   createCanvas(800, 800);
   background(255)
   layerManager = new LayerManager();
-  blendMode(DIFFERENCE);
-  }
-
-
+  //randomly pick blendmode
+  //blendMode(DIFFERENCE);
+ 
+}
 
 
 
 function draw(){
  
   if(update == true){
-  
+   
+    background(255);
   for(l in layerManager.layers){
     layerManager.layers[l].update();
-    
+
     layerManager.layers[l].display();
     
   }
@@ -53,8 +54,6 @@ function keyPressed(){
       typeString = 'confirmed'
     }
 
-  
-
     let data = int( random(10,1500));
 
     let string = data.toString() +' ' + typeString + ' last month';
@@ -65,12 +64,12 @@ function keyPressed(){
 
 
 function newEntry(type,data,string){
-  let pos = createVector(width*0.5, height*0.5);
-  
+  let pos = createVector(random(0.2*width,0.8*width), random(0.2*height,0.8*height));
   layerManager.addLayer(type,data,string,pos);
-
 }
 
+
+//zzold
 function pickProb(){
   let pick = random(1);
   let target = random(0.2,0.7);

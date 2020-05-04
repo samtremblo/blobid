@@ -11,15 +11,36 @@ class Layer{
     this.data = data;
     this.string = string;
     this.pos = pos
-
+    this.inc = random(1000)
     this.numWord = int(this.data/100) //maybe will need to be rescaled depending on results with data
     
     this.target1 = 0.32; 
     this.target2 = 0.67
 
+    this.fallForce = p5.Vector.random2D().mult(0.001);
+
+    this.direction = int(random(4))
+    this.edgeBehavior = int(random(2))
+    this.rotate = int(random(2));
+    this.originTranslate = int(random(2));
+    this.outline = int(random(2));
+
     this.setWeight();
     this.fillLayer();
+    this.setup();
+    console.log( 'layer settings' , 'dir' , this.direction ,'edge', this.edgeBehavior,'rot',this.rotate,'origin' , this.originTranslate, 'outline' ,this.outline)
   }
+//setup functions
+
+setup(){
+  for(let w in this.words ){
+    this.words[w].translateOrigin = this.originTranslate;
+    this.words[w].rotate = this.rotate;
+    this.words[w].outline = this.outilne;
+  }
+
+
+}
 
 setWeight(){
 
@@ -40,7 +61,7 @@ setWeight(){
      break;
  }
 }
-   
+
 addWords(_pos, color,text)
   {
     
@@ -53,10 +74,31 @@ deleteWord()
     this.words.splice(0,1)
   }
 
+//
+//animation
+//
+
 wind(force){
 let w = createVector(force,0);
 return w
 } 
+
+left(){
+let w = createVector(-1,0);
+return w
+}
+right(){
+  let w = createVector(1,0);
+  return w
+  }
+up(){
+    let w = createVector(0,-1);
+    return w
+    }
+down(){
+      let w = createVector(0,1);
+      return w
+      }
 
 display(){
   for(let w in this.words ){
@@ -68,12 +110,63 @@ display(){
   }
 }
 
+fall(){
+  for(let w in this.words ){
+
+    this.words[w].applyForce(this.fallForce);
+    this.words[w].update();
+    this.words[w].wraparound();
+  }
+}
+
 update(){
   for(let w in this.words ){
-    this.words[w].applyForce(this.wind(10));
-    this.words[w].wraparound();
-    this.words[w].update();
+    //pick if its rotate or not
+   //  this.words[w].rotate = true;
 
+    let  x = this.inc;
+    this.words[w].applyBehavior();
+
+
+
+    switch(this.direction){
+
+      case 0 : 
+      this.words[w].applyForce(this.left());
+
+      break;
+      case 1: 
+      this.words[w].applyForce(this.right());
+
+      break;
+      case 2 : 
+      this.words[w].applyForce(this.up());
+
+      break;
+      case 3 : 
+      this.words[w].applyForce(this.down());
+
+      break;
+    }
+
+    //this.words[w].applyForce(this.wind(noise(x)*10,noise(x+500)*10));
+   
+    switch(this.edgeBehavior){
+
+      case 0 :
+        this.words[w].wraparound();
+        break;
+      case 1:
+        this.words[w].bounceOnWall();
+        break;
+      case 2:
+        this.words[w].boundaries(random(40));
+        break;
+    }
+    
+   
+    this.words[w].update();
+    this.x +=0.1;
   }
 }
 

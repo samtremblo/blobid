@@ -134,9 +134,9 @@ returnWW(time){
 }
 
 returnLoc(loc ,time){
-console.log(loc, time)
-console.log(typeof(loc))
-console.log(this.data)
+//console.log(loc, time)
+//console.log(typeof(loc))
+//console.log(this.data)
 
  let country = this.data.findRows(loc,"Country/Region");
  let timeBefore;
@@ -146,8 +146,8 @@ console.log(this.data)
  if(time == 'day') timeBefore = 1;
  if(time == 'week') timeBefore = 7;
  if(time == 'month') timeBefore = 30;
-  console.log(country)
-  console.log(timeBefore)
+ // console.log(country)
+ // console.log(timeBefore)
  let length = this.data.getColumnCount()-1;
 
  if( country.length > 1 ){

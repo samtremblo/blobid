@@ -14,6 +14,7 @@ let hasStarted = false;
 let index;
 let amountLines = 0;
 let spawnInterval,showHelpTextInterval;
+let update = false;
 
 
 //-----------------------------------------------------Easier capitalization for Countries---------------------
@@ -30,18 +31,14 @@ function preload() {
    recovered_temp = loadTable('Recovered_Global.csv', 'csv','header');
    death_temp = loadTable('Death_Global.csv', 'csv','header');
    confirmed_temp = loadTable('Confirmed_Global.csv', 'csv','header');
-   //country_codes = loadTable('country_codes_csv.csv', 'csv','header');
-   
-   //old
-   //dataCovid = loadTable('testData.csv', 'csv','header')
-   //dataContinent = loadTable('countries_continent.csv', 'csv','header')
   
   }
 
 
 function setup() {
  layerManager = new LayerManager();
-  blendMode(DIFFERENCE);
+
+ 
   //-----------------------------------------------------Creating a paragraph to put the console text in---------------------
 
   p = createP(
@@ -93,9 +90,20 @@ function setup() {
   filter(BLUR, 1); //Blur makes it look a bit more dynamic... to be checked
   //-----------------------------------------------------Spawning the text at an interval--------------------
   spawnInterval = setInterval(SpawnInitialText, 300)
+
+
+  //artwork.blendMode(DODGE);
 }
 
 function draw() {
+
+   //artwork.background(255);
+   for(l in layerManager.layers){
+     
+   layerManager.layers[l].fall();
+   layerManager.layers[l].display();
+ }
+ image(artwork, width / 2, 0);
 
   //-----------------------------------------------------Validates if initial message went through--------------------
   if (amountLines > message.length - 1) {
@@ -104,7 +112,26 @@ function draw() {
 
   }
 
+  //------update canvas when key pressed-------//
+  if(update == true){
+  
+    for(l in layerManager.layers){
+    // artwork.background(0);
+      layerManager.layers[l].update();
+  
+      layerManager.layers[l].display();
+      
+     
+    }
+    image(artwork, width / 2, 0);
+    }else{
+  
 
+    } 
+  
+  
+  
+    update = false;
 
 }
 //-----------------------------------------------------Spawns initial message and appends every line-------------------
@@ -113,8 +140,6 @@ function SpawnInitialText() {
   amountLines++;
 
 }
-
-
 
 //-----------------------------------------------------Generates the input field and gives a basic style-------------------
 function generateInput() {
@@ -129,10 +154,6 @@ function generateInput() {
 
 }
 
-
-
-
-
 //-----------------------------------------------------Logs all keypresses for Artwork modulation-------------------
 function keyPressed() {
   if (keyCode === ENTER) {
@@ -141,10 +162,11 @@ function keyPressed() {
   console.log(AmountInputs + " Inputs");
   AmountInputs++;
 
-  if(key == 'k'){
-  
+
+  if(key){
+    update = true; //------update canvas when key pressed-------//
+    
   }
-  
 
 }
 
@@ -200,7 +222,6 @@ let words = Input.value().split(' ');
 
   }
 
-//returnData('confirmed','week','Afghanistan');
 
 
 
@@ -218,8 +239,9 @@ Input.value("");
 }
 
 function newEntry(type,data,string){
-  let pos = createVector(width*0.5, height*0.5);
   
+  //console.log('Logging new entry')
+  let pos = createVector(width*0.5, height*0.5);
   layerManager.addLayer(type,data,string,pos);
 
 }
@@ -262,7 +284,6 @@ function windowResized() {
 
   stroke(15, 207, 133, 255)
   line(width / 2, 0, width / 2, height)
-
 }
 
 
@@ -280,17 +301,13 @@ async function getData(file,array){
    
 }
 
-
-
-
 ///VERIFY IF ELSE STATEMENT
 //return data  base on passed argument
 function returnData( dataType, time, location){
-
+// console.log('returning data')
  
 
       if(dataType == 'death'){
-        console.log('inside death')
 
          if(time == 'day'){
            
