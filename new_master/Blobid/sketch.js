@@ -48,7 +48,7 @@ function setup() {
 
   ).addClass('Console');
   //-----------------------------------------------------Adding the greeting message in an array----------------------
-  append(message, 'blobid-loader@admin:~$ ready');
+  append(message, 'blobid-loader@admin:<b class="Pink">~$</b> ready');
   append(message, 'Blobid is a different way to see data about the current crisis.');
   append(message, 'Cheers!');
   append(message, ' <br> Type help to start');
