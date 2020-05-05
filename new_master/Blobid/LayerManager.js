@@ -5,7 +5,7 @@ class LayerManager{
   
     this.layers = [];
     
-    this.max = 4;
+    this.max = 2;
   }
   
   checkMaximum(){
@@ -17,11 +17,11 @@ class LayerManager{
   }
 
 
- addLayer(type,data,string,pos){
+ addLayer(type,data,string){
 
   this.checkMaximum();
 
-  let l = new Layer(type,data,string,pos);
+  let l = new Layer(type,data,string);
   this.layers.push(l);
 
  }

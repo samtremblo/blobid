@@ -1,45 +1,58 @@
 class Layer{
   
 
-
-  
- constructor(type,data,string,pos) 
+ constructor(type,data,string) 
   {
+
+    this.color = this.colorIndex();
 
     this.words = [];
 
     this.type=type;
+
     this.data = data;
+
     this.string = string;
-    this.pos = pos
-    this.inc = random(1000)
-    this.numWord = int(this.data/100) //maybe will need to be rescaled depending on results with data
+
+    this.numWord =constrain(int(this.data/100) , 1,10) //maybe will need to be rescaled depending on results with data
     
     this.target1 = 0.32; 
     this.target2 = 0.67
 
     this.fallForce = p5.Vector.random2D().mult(0.001);
 
-    this.direction = int(random(4))
+
+    this.direction = int(random(4)) //can be used
+
     this.edgeBehavior = int(random(2))
     this.rotate = int(random(2));
     this.originTranslate = int(random(2));
     this.outline = int(random(2));
 
     this.setWeight();
-    this.fillLayer();
+    this.generateWords();
+    //this.fillLayer();
+
     this.setup();
     console.log( 'layer settings' , 'dir' , this.direction ,'edge', this.edgeBehavior,'rot',this.rotate,'origin' , this.originTranslate, 'outline' ,this.outline)
   }
 //setup functions
 
+colorIndex(){
+let pick = int(random(palette.length))
+
+while(pick == bgColorIndex){
+  pick = int(random(palette.length))
+}
+return pick;
+}
+
 setup(){
   for(let w in this.words ){
-    this.words[w].translateOrigin = this.originTranslate;
-    this.words[w].rotate = this.rotate;
-    this.words[w].outline = this.outilne;
+   // this.words[w].translateOrigin = this.originTranslate;
+   // this.words[w].rotate = this.rotate;
+    this.words[w].outline = this.outline;
   }
-
 
 }
 
@@ -86,18 +99,22 @@ return w
 
 left(){
 let w = createVector(-1,0);
+w.mult(random(10))
 return w
 }
 right(){
   let w = createVector(1,0);
+  w.mult(random(10))
   return w
   }
 up(){
     let w = createVector(0,-1);
+    w.mult(random(10))
     return w
     }
 down(){
       let w = createVector(0,1);
+      w.mult(random(10));
       return w
       }
 
@@ -125,19 +142,19 @@ update(){
     //pick if its rotate or not
    //  this.words[w].rotate = true;
 
-    let  x = this.inc;
-    this.words[w].applyBehavior();
+   /// let  x = this.inc;
+    //this.words[w].applyBehavior();
 
 
 
     switch(this.direction){
 
       case 0 : 
-      this.words[w].applyForce(this.left());
+      this.words[w].applyForce(this.down());
 
       break;
       case 1: 
-      this.words[w].applyForce(this.right());
+      this.words[w].applyForce(this.left());
 
       break;
       case 2 : 
@@ -145,32 +162,74 @@ update(){
 
       break;
       case 3 : 
-      this.words[w].applyForce(this.down());
+      this.words[w].applyForce(this.right());
 
       break;
     }
 
     //this.words[w].applyForce(this.wind(noise(x)*10,noise(x+500)*10));
    
-    switch(this.edgeBehavior){
+    // switch(this.edgeBehavior){
 
-      case 0 :
-        this.words[w].wraparound();
-        break;
-      case 1:
-        this.words[w].bounceOnWall();
-        break;
-      case 2:
-        this.words[w].boundaries(random(40));
-        break;
-    }
+    //   case 0 :
+    //     this.words[w].wraparound();
+    //     break;
+    //   case 1:
+    //     this.words[w].bounceOnWall();
+    //     break;
+    //   case 2:
+    //     this.words[w].boundaries(random(40));
+    //     break;
+    // }
     
    
     this.words[w].update();
-    this.x +=0.1;
+    //this.x +=0.1;
   }
 }
 
+//keep
+spawn(){
+ let x;
+ let y;
+ let pos; 
+  switch(this.direction){
+
+    case 0: //up
+      x = random(width);
+      y = -100;
+      pos = createVector(x,y);
+      break;
+
+    case 1: //right
+      x = width +100;
+      y = random(height);
+     pos = createVector(x,y);
+     break;
+
+    case 2: //down
+     x = random(width);
+     y = height+100;
+     pos = createVector(x,y);
+     break;
+
+    case 3: //left
+     x = -100;
+     y = random(height);
+     pos = createVector(x,y);
+     break;
+  }
+
+ return pos; 
+}
+//keep
+generateWords(){
+
+  for( let i = 0 ; i < this.numWord ; i++ ){
+    let pos = this.spawn();
+    this.addWords(pos, this.color , this.string);
+  }
+}
 
 
 
@@ -212,12 +271,13 @@ if( pick < this.target1){
 for(let p in positions){
 /// CREATE COLORS SYSTEM
  // console.log(positions[p])
-  let color = random(255);
+  let color = palette[this.color];
   this.addWords(positions[p], color , this.string);
 }
 }
 
 
+//might remove
 randomPos(numPoints,border){
   if(arguments.length== 1)border = 0;
 
@@ -238,6 +298,7 @@ randomPos(numPoints,border){
   return pickedPos;
 }
 
+//might remove
 pointLine(axis , pos, numPoints, size ){
   let linePoints = [];
   let pickedPos = [];
@@ -270,6 +331,7 @@ pointLine(axis , pos, numPoints, size ){
   return pickedPos;
 }
 
+//might remove
 pointCircle(numPoints ,pos, r){
 
   let circlePoints=[];
@@ -297,6 +359,7 @@ pointCircle(numPoints ,pos, r){
   return pickedPos;
 }
 
+//might remove 9 dont know what this is
 Clean(){
   fill(255);
   rect(0, 0, windowWidth, windowHeight)

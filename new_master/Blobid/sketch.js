@@ -16,6 +16,9 @@ let amountLines = 0;
 let spawnInterval,showHelpTextInterval;
 let update = false;
 
+let palette = [[34, 102, 121],[28, 45, 137],[29, 135, 63],[45, 118, 13],[169, 204, 110],[1, 1, 5]]
+let bgColorIndex = 0;
+let bgColor;
 
 //-----------------------------------------------------Easier capitalization for Countries---------------------
 const capitalize = (str, lower = false) =>
@@ -78,7 +81,10 @@ function setup() {
   //-----------------------------------------------------Giving a background color for the console and artwork--------------------
   let bg = color(17, 41, 31, 255);
   cnsl.background(bg)
-  artwork.background(255)
+
+  bgColorIndex = int(random(palette.length));
+  bgColor = palette[bgColorIndex];
+  artwork.background(bgColor[0],bgColor[1],bgColor[2])
 
   //-----------------------------------------------------Placing both the artwork and the console--------------------
   image(artwork, width / 2, 0);
@@ -87,21 +93,20 @@ function setup() {
   strokeWeight(2)
   stroke(15, 207, 133, 255)
   line(width / 2, 0, width / 2, height)
-  filter(BLUR, 1); //Blur makes it look a bit more dynamic... to be checked
+  //filter(BLUR, 1); //Blur makes it look a bit more dynamic... to be checked
   //-----------------------------------------------------Spawning the text at an interval--------------------
   spawnInterval = setInterval(SpawnInitialText, 300)
 
 
-  //artwork.blendMode(DODGE);
+ // artwork.blendMode(DIFFERENCE);
 }
 
 function draw() {
 
-   //artwork.background(255);
+  //artwork.background(bgColor[0],bgColor[1],bgColor[2]);
    for(l in layerManager.layers){
-     
-   layerManager.layers[l].fall();
-   layerManager.layers[l].display();
+    layerManager.layers[l].update();
+    layerManager.layers[l].display();
  }
  image(artwork, width / 2, 0);
 
@@ -114,21 +119,26 @@ function draw() {
 
   //------update canvas when key pressed-------//
   if(update == true){
-  
-    for(l in layerManager.layers){
-    // artwork.background(0);
-      layerManager.layers[l].update();
-  
-      layerManager.layers[l].display();
+   let pick = random(1)
+   let target = 0.3;
+   if(pick < target){
+     copyPart();
+   }else{
+    test();
+   }
+   
+   
+   
+   // for(l in layerManager.layers){
+    // artwork.background(bgColor[0],bgColor[1],bgColor[2]);
       
+     //layerManager.layers[l].update();
+     //layerManager.layers[l].display();
+       
      
+    
+    //image(artwork, width / 2, 0);
     }
-    image(artwork, width / 2, 0);
-    }else{
-  
-
-    } 
-  
   
   
     update = false;
@@ -153,6 +163,30 @@ function generateInput() {
   Input.style("border-color", "#0fcf85")
 
 }
+
+function test(){
+
+  artwork.image(artwork,random(width),random(height),random(width),random(height),random(width),random(height))
+}
+
+function copyPart(){
+  let pos = createVector(random(width),random(height));
+
+  c = artwork.get(pos.x,pos.y,random(1,width),random(1,height));
+
+  let pick = random(1);
+  let target = 0.25;
+  if ( pick < target){
+    let iter = int(random(20));
+
+    for( let i = 0 ; i < iter ; i++){
+      artwork.image(c,random(1,width),random(1,height));
+    }
+  }else {
+  artwork.image(c,random(1,width),random(1,height));
+  }
+}
+
 
 //-----------------------------------------------------Logs all keypresses for Artwork modulation-------------------
 function keyPressed() {
@@ -225,7 +259,7 @@ if(data == undefined) data = 0 ;
     
     layerManager.removeLayers();
     artwork = createGraphics(width / 2, height);
-    artwork.background(255, 255)
+    artwork.background(bgColor[0],bgColor[1],bgColor[2])
     image(artwork, width / 2, 0);
 
        
@@ -251,8 +285,8 @@ Input.value("");
 function newEntry(type,data,string){
   
   //console.log('Logging new entry')
-  let pos = createVector(width*0.5, height*0.5);
-  layerManager.addLayer(type,data,string,pos);
+  //let pos = createVector(width*0.5, height*0.5);
+  layerManager.addLayer(type,data,string);
 
 }
 

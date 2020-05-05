@@ -13,26 +13,47 @@ class Word {
 
         this.inc = random(1000);
 
-        this.maxSpeed = random(0.8,3.2);
-        this.maxForce = random(0.5,3.5);
+        this.maxSpeed = random(0.8,1000);
+        this.maxForce = random(0.5,1000);
 
         this.target = createVector(random(width), random(height));
         this.wanderTheta = 0;
 
         this.behavior = 1//floor(random(0,2)); // 0 = wandering 1= arriving
-        this.rotate = false;
-        this.theta = 0;
+        
+        this.rotate = int(random(2));
+        this.theta = 0; 
+
+        this.theta = HALF_PI;
         this.flipped = false;
         this.flippedTimer =0;
+
         this.outline = false; 
-        this.translateOrigin = false;
+       
+
+        this.isDead = false;
 
         this.text = text;
+
         this.textSize = random(10,50) ; 
-        this.color = color; 
+
+        this.color = palette[color]; 
+
+        //console.log('color' , this.color)
        
-        
+        this.setup(); 
     }
+
+    setup(){
+        let possibilities = [90,180,270]
+        if(this.rotate == 1){
+         let index = int(random(3)); 
+         this.theta = possibilities[index]
+        }
+
+
+    }
+
 
     update(){
         
@@ -42,8 +63,7 @@ class Word {
         this.acc.mult(0);   
 
         this.textSize -= 0.01;
-        this.theta += this.inc;
-        this.inc+= 0.000001
+       
     }
 
     applyBehavior(){
@@ -59,18 +79,19 @@ class Word {
 
     display(){
 
-        artwork.push(this.color);
-
+        artwork.push();
+        artwork.angleMode(DEGREES)
+        artwork.translate(this.pos.x,this.pos.y);
         //fill or outilnes 
         if(this.outline == true){
 
             artwork.noFill();
-            artwork.stroke(this.color);
+            artwork.stroke(this.color[0],this.color[1],this.color[2]);
 
         }else{
 
             artwork.noStroke();
-            artwork.fill(this.color);
+            artwork.fill(this.color[0],this.color[1],this.color[2]);
 
         }
 
@@ -84,13 +105,15 @@ class Word {
         }else{
             
              if(this.rotate == true) artwork.rotate(this.theta);
-             artwork.text(this.text , this.pos.x,this.pos.y);
+             artwork.text(this.text , 0,0);
         }
         artwork.pop();
         
 
     }
      
+
+    //migth not need
     draw(){
 
         this.applyBehavior();      
@@ -104,7 +127,8 @@ class Word {
 
 
 //moving behavior
-
+    
+   //might not need
     seek(target){
 
         let desired = p5.Vector.sub(target , this.pos);
@@ -117,13 +141,15 @@ class Word {
     
     }
 
+
     applyForce(force){
         let f = force.copy();
         f.limit(this,this.maxForce);
 
         this.acc.add(f);
     }
-
+     
+    //might not need
     arrive( target, rad ){
         let desired = p5.Vector.sub(target , this.pos);
         let d = desired.mag();
@@ -149,6 +175,8 @@ class Word {
 
     }
 
+
+    //might not need
     wandering(radius){
         
         let desired = this.vel.copy();
@@ -181,6 +209,7 @@ class Word {
 
     }
 
+    //might not need
     showTarget(){
         push();
         fill(255,0,0,120);
