@@ -37,7 +37,7 @@ class Word {
 
         this.textSize = random(10,50) ; 
 
-        this.color = palette[color]; 
+        this.color = color; 
 
         //console.log('color' , this.color)
        

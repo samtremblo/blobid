@@ -1,10 +1,11 @@
 class Layer{
   
 
- constructor(type,data,string) 
-  {
+ constructor(type,data,string,palette) 
+  { 
+    this.urn = new Urn();
 
-    this.color = this.colorIndex();
+    this.color = palette//this.colorIndex();
 
     this.words = [];
 
@@ -29,11 +30,14 @@ class Layer{
     this.originTranslate = int(random(2));
     this.outline = int(random(2));
 
+    this.urn.fillArray(this.color);
     this.setWeight();
     this.generateWords();
     //this.fillLayer();
 
     this.setup();
+    
+
     console.log( 'layer settings' , 'dir' , this.direction ,'edge', this.edgeBehavior,'rot',this.rotate,'origin' , this.originTranslate, 'outline' ,this.outline)
   }
 //setup functions
@@ -227,7 +231,8 @@ generateWords(){
 
   for( let i = 0 ; i < this.numWord ; i++ ){
     let pos = this.spawn();
-    this.addWords(pos, this.color , this.string);
+    let color = this.urn.pick();
+    this.addWords(pos, color , this.string);
   }
 }
 

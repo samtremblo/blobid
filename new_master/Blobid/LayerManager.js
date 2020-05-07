@@ -21,7 +21,7 @@ class LayerManager{
 
   this.checkMaximum();
 
-  let l = new Layer(type,data,string);
+  let l = new Layer(type,data,string,palette);
   this.layers.push(l);
 
  }
