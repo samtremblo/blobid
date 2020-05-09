@@ -11,7 +11,7 @@ let helpMessage = [];
 let commandsMessage = [];
 
 let isWritting = true;
-let p;
+let p,ed;
 let hasStarted = false;
 let index;
 let amountLines = 0;
@@ -21,7 +21,7 @@ let update = false;
 let palette = [[34, 102, 121],[28, 45, 137],[29, 135, 63],[45, 118, 13],[169, 204, 110],[1, 1, 5]]
 let bgColorIndex = 0;
 let bgColor;
-
+var scroll
 
 let timeLineSpawn = 300;
 
@@ -52,6 +52,8 @@ function setup() {
   p = createP(
 
   ).addClass('Console');
+
+
   //-----------------------------------------------------Adding the greeting message in an array----------------------
   append(message, 'blobid-loader@admin:<b class="pink">~</b>$ ready');
   append(message, '<br>Blobid is a different way to see data about the current crisis.');
@@ -205,7 +207,7 @@ function copyPart(){
 
 //-----------------------------------------------------Logs all keypresses for Artwork modulation-------------------
 function keyPressed() {
-  if (keyCode === ENTER) {
+  if (keyCode === ENTER && isWritting === false) {
     sendInput();
   }
   console.log(AmountInputs + " Inputs");
@@ -252,8 +254,8 @@ let data;
     if(words[2]!=undefined){
       data = returnData(words[0],words[1],capitalize(words[2]))
     };
-
-if(data!=undefined){
+if(!isNaN(data) ){
+  console.log(data + "data");
   p.html(" <br> There were <b class='pink'>" + data + " " +words[0]+ "</b> in " + words[2] + " last " + words[1] +"<br>", true)
 }
 
@@ -265,6 +267,8 @@ if(data == undefined)
   ;
 
   if (words[0] == "help" && words.length<2) {
+    clearInterval(showHelpTextInterval);
+    showHelpTextInterval = 0;
     isWritting = true;
     amountLines = 0;
     showHelpTextInterval =  setInterval(displayHelp,timeLineSpawn)
@@ -272,6 +276,8 @@ if(data == undefined)
 
   
   if (words[0] == "commands" && words.length<2) {
+    clearInterval(showCommandTextInterval);
+    showCommandTextInterval = 0;
     isWritting = true;
     amountLines = 0;
     showCommandTextInterval =  setInterval(displayCommands,timeLineSpawn)
@@ -321,9 +327,14 @@ function displayHelp(){
   
   p.html(helpMessage[amountLines] + "<br>", true)
   amountLines++;
-  if(amountLines > helpMessage.length - 1) {
+  if(helpMessage[amountLines] == undefined) {
     clearInterval(showHelpTextInterval);
+    showHelpTextInterval = 0;
+    amountLines =0;
+
+    
     isWritting = false;
+
   }
 }
 
@@ -334,6 +345,8 @@ function displayCommands(){
   amountLines++;
   if(amountLines > commandsMessage.length -1) {
     clearInterval(showCommandTextInterval);
+    amountLines =0;
+
     isWritting = false;
   }
 }

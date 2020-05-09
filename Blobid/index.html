@@ -19,16 +19,33 @@ font-size: 15px;
 justify-content: center;
 text-transform: uppercase;
 text-align: left;
-overflow: scroll;
 max-height: 90%;
 max-width: 50%;
 overflow: hidden;
 font-weight: bold;
+animation: slide infinite 3s alternate;
 }
+
 .pink{
 color:#ff2fff !important;
 }
+.box{
+    display: block;
+    margin: 20px;
+    padding: 20px;
+    background: #ccc;
+    width: 100%;        
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+
+
   </style>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <script src="../p5.js"></script>
   <script src="../addons/p5.sound.min.js"></script>
   <script src="sketch.js"></script>
@@ -38,11 +55,26 @@ color:#ff2fff !important;
   <script src="sketch.js"></script>
   <script src="Word.js"></script>
   <script src="Urn.js"></script>
-
-
-  <script></script>
 </head>
 <body>
+ 
+  <script> 
+setInterval(function(){
+
+scrollSmoothToBottom('Console')
+
+  
+}, 500);
+
+  function scrollSmoothToBottom (id) {
+    console.log('s')
+   var div = document.getElementsByClassName(id);
+   $('.' + id).animate({
+      scrollTop:1000000
+   }, 500);
+}
+      </script>
+
 
 </body>
 
