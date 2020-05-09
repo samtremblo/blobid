@@ -175,7 +175,7 @@ function generateInput() {
   Input = createInput().size(windowWidth / 2 - 5, inputHeight)
   Input.position(0, cnsl.height - inputHeight - 6);
   //Style
-  Input.style("color", "#0fcf85")
+  Input.style("color", "#ff2fff")
   Input.style("background-color", "rgb(17, 41, 31,255)")
   Input.style("border-color", "#0fcf85")
 
