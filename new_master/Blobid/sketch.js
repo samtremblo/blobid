@@ -253,13 +253,16 @@ let data;
       data = returnData(words[0],words[1],capitalize(words[2]))
     };
 
+if(data!=undefined){
+  p.html(" <br> There were <b class='pink'>" + data + " " +words[0]+ "</b> in " + words[2] + " last " + words[1] +"<br>", true)
+}
 
-if(data == undefined) data = 0 ;  
+if(data == undefined)
+    data = 0 ;  
     let string = data.toString() +' ' + typeString + ' last ' + words[1];
     console.log(string)
     newEntry(type,data,string);
-    console.log("There were " + data +words[0]+ "in " + words[2] + "last " + words[1])
-    p.html("There were " + data + " " +words[0]+ " in " + words[2] + " last " + words[1] +"<br>", true);
+  ;
 
   if (words[0] == "help" && words.length<2) {
     isWritting = true;
