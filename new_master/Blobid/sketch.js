@@ -20,6 +20,9 @@ let palette = [[34, 102, 121],[28, 45, 137],[29, 135, 63],[45, 118, 13],[169, 20
 let bgColorIndex = 0;
 let bgColor;
 
+
+let timeLineSpawn = 300;
+
 //-----------------------------------------------------Easier capitalization for Countries---------------------
 const capitalize = (str, lower = false) =>
   (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
@@ -48,18 +51,23 @@ function setup() {
 
   ).addClass('Console');
   //-----------------------------------------------------Adding the greeting message in an array----------------------
-  append(message, 'blobid-loader@admin:~$ ready');
-  append(message, 'Blobid is a different way to see data about the current crisis.');
-  append(message, 'Cheers!');
+  append(message, 'blobid-loader@admin:<b class="pink">~</b>$ ready');
+  append(message, '<br>Blobid is a different way to see data about the current crisis.');
   append(message, ' <br> Type help to start');
 
 
 
 
+  append(helpMessage, '<br>');
+  append(helpMessage, 'Blobid is a console that outputs art depending on what you request');
+  append(helpMessage, 'As of now, you can type a data and a frame of time followed by country');
+  append(helpMessage, '<br>First word can be <b class="pink">death</b> / <b class="pink">recovered</b> / <b class="pink">confirmed</b>');
+  append(helpMessage, 'Second word can be <b class="pink">day</b> / <b class="pink">month</b> / <b class="pink">all</b>');
+  append(helpMessage, 'Third word can be any <b class="pink">country</b>. If it does not work, type the command  <b class="pink">countries</b>');
 
-  append(helpMessage, 'Blahblahblah');
-  append(helpMessage, 'Try with this');
-  append(helpMessage, 'Death Week Canada');
+  append(helpMessage,'<br> <br> Example: <b class="pink">Death Week Canada</b>');
+
+  append(helpMessage,'<br> <br>For the full command list, type<b class="pink"> Commands</b>');
 
 
 
@@ -95,7 +103,8 @@ function setup() {
   line(width / 2, 0, width / 2, height)
   //filter(BLUR, 1); //Blur makes it look a bit more dynamic... to be checked
   //-----------------------------------------------------Spawning the text at an interval--------------------
-  spawnInterval = setInterval(SpawnInitialText, 300)
+ 
+  spawnInterval = setInterval(SpawnInitialText, timeLineSpawn)
 
 
  // artwork.blendMode(DIFFERENCE);
@@ -247,12 +256,12 @@ if(data == undefined) data = 0 ;
     isWritting = true;
     console.log("This is the help menu")
    amountLines = 0;
-    showHelpTextInterval =  setInterval(displayHelp,500)
+    showHelpTextInterval =  setInterval(displayHelp,timeLineSpawn)
   }
 
   
   if (words[0] == "clear") {
-    p.html('blobid-loader@admin:~$ ready <br>');
+    p.html('blobid-loader@admin:<b class="pink"></b>~$ ready <br>');
 
    
       // artwork.background(0);
