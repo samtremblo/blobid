@@ -8,12 +8,14 @@ let data = [3]; //0 = recovered 1 = death 2 = confirmed
 
 let message = [];
 let helpMessage = [];
+let commandsMessage = [];
+
 let isWritting = true;
 let p;
 let hasStarted = false;
 let index;
 let amountLines = 0;
-let spawnInterval,showHelpTextInterval;
+let spawnInterval,showHelpTextInterval,showCommandTextInterval;
 let update = false;
 
 let palette = [[34, 102, 121],[28, 45, 137],[29, 135, 63],[45, 118, 13],[169, 204, 110],[1, 1, 5]]
@@ -53,26 +55,30 @@ function setup() {
   //-----------------------------------------------------Adding the greeting message in an array----------------------
   append(message, 'blobid-loader@admin:<b class="pink">~</b>$ ready');
   append(message, '<br>Blobid is a different way to see data about the current crisis.');
-  append(message, ' <br> Type help to start');
+  append(message, ' <br> Type<b class="pink"> help </b>to start');
 
 
 
-
+  //-----------------------------------------------------Adding the help message in an array----------------------
   append(helpMessage, '<br>');
   append(helpMessage, 'Blobid is a console that outputs art depending on what you request');
   append(helpMessage, 'As of now, you can type a data and a frame of time followed by country');
+  append(helpMessage,'<br>For an example, you can write: <b class="pink">Death Week Canada</b>');
+
   append(helpMessage, '<br>First word can be <b class="pink">death</b> / <b class="pink">recovered</b> / <b class="pink">confirmed</b>');
   append(helpMessage, 'Second word can be <b class="pink">day</b> / <b class="pink">month</b> / <b class="pink">all</b>');
   append(helpMessage, 'Third word can be any <b class="pink">country</b>. If it does not work, type the command  <b class="pink">countries</b>');
-
-  append(helpMessage,'<br> <br> Example: <b class="pink">Death Week Canada</b>');
-
   append(helpMessage,'<br> <br>For the full command list, type<b class="pink"> Commands</b>');
 
 
+  append(helpMessage, '<br>');
 
-
-
+  //-----------------------------------------------------Adding the commands message in an array----------------------
+  append(commandsMessage, '   <b class="pink">help</b>: gives you an understanding how Blobid works');
+  append(commandsMessage, ' <b class="pink">about</b>: tells you about who made Blobid');
+  append(commandsMessage, ' <b class="pink">countries</b>: gives you a list of all the countries compatible with blobid');
+  append(commandsMessage, ' <b class="pink">clear</b>: clears the console and the artwork');
+  append(commandsMessage, ' <b class="pink">commands</b>: gives you a list of available commands');
 
 
   //create data handler object
@@ -243,25 +249,35 @@ let data;
     }
 
 
-    if(words[2]!=undefined)data = returnData(words[0],words[1],capitalize(words[2]));
+    if(words[2]!=undefined){
+      data = returnData(words[0],words[1],capitalize(words[2]))
+    };
 
 
 if(data == undefined) data = 0 ;  
     let string = data.toString() +' ' + typeString + ' last ' + words[1];
     console.log(string)
     newEntry(type,data,string);
-
+    console.log("There were " + data +words[0]+ "in " + words[2] + "last " + words[1])
+    p.html("There were " + data + " " +words[0]+ " in " + words[2] + " last " + words[1] +"<br>", true);
 
   if (words[0] == "help" && words.length<2) {
     isWritting = true;
-    console.log("This is the help menu")
-   amountLines = 0;
+    amountLines = 0;
     showHelpTextInterval =  setInterval(displayHelp,timeLineSpawn)
   }
 
   
+  if (words[0] == "commands" && words.length<2) {
+    isWritting = true;
+    amountLines = 0;
+    showCommandTextInterval =  setInterval(displayCommands,timeLineSpawn)
+  }
+
+
+  
   if (words[0] == "clear") {
-    p.html('blobid-loader@admin:<b class="pink"></b>~$ ready <br>');
+    p.html('blobid-loader@admin:<b class="pink">~</b>$ ready <br>');
 
    
       // artwork.background(0);
@@ -274,7 +290,6 @@ if(data == undefined) data = 0 ;
        
       
   }
-
 
 
 
@@ -305,6 +320,17 @@ function displayHelp(){
   amountLines++;
   if(amountLines > helpMessage.length - 1) {
     clearInterval(showHelpTextInterval);
+    isWritting = false;
+  }
+}
+
+
+function displayCommands(){
+  
+  p.html(commandsMessage[amountLines] + "<br>", true)
+  amountLines++;
+  if(amountLines > commandsMessage.length -1) {
+    clearInterval(showCommandTextInterval);
     isWritting = false;
   }
 }
